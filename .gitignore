@@ -1,2 +1,6 @@
-plugins/*
-!plugins/*.writhem_*
+misc/*
+!misc/update_scripts/update_teevee.php
+www/*
+!www/lib/teevee.php
+!www/lib/smarty/plugins/*.writhem_*
+!www/templates/writhem/*
