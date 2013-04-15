@@ -88,7 +88,7 @@
 	{/strip}
 
 	<div id="logo">
-		<a class="logolink" title="{$site->title} Logo" href="{$smarty.const.WWW_TOP}{$site->home_link}"><img class="logoimg" alt="{$site->title} Logo" src="{$smarty.const.WWW_TOP}/views/images/clearlogo.png" /></a>
+		<a class="logolink" title="{$site->title} Logo" href="{$smarty.const.WWW_TOP}{$site->home_link}"><img class="logoimg" alt="{$site->title} Logo" src="{$smarty.const.WWW_TOP}/templates/writhem/images/clearlogo.png" /></a>
 
 		{if $site->menuposition==2}<ul>{$main_menu}</ul>{/if}
 

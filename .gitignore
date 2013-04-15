@@ -1,6 +1,12 @@
 misc/*
 !misc/update_scripts/update_teevee.php
 www/*
+www/templates/baffi/
+www/templates/carbon/
+www/templates/default/
+!www/templates
+!www/lib/news.php
 !www/lib/teevee.php
 !www/lib/smarty/plugins/*.writhem_*
-!www/templates/writhem/*
+!www/pages/news.php
+!www/pages/newspost.php

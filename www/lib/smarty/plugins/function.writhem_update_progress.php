@@ -14,10 +14,10 @@ $ER = "rawr";
 
 $folder = '/mnt/adamo/nzbfiles/prologs/';
 $files = array(
+    array('part4.log','Backlog Updater'),
     array('part1.log','Binary Updater'),
     array('part2.log','Release Updater'),
-    array('part3.log','MediaInfo Updater'),
-    array('part4.log','Backlog Updater')
+    array('part3.log','MediaInfo Updater')
     );
 
 foreach ($files as $file) {
@@ -25,28 +25,32 @@ foreach ($files as $file) {
     if (file_exists($filename)) {
         $update_sec_ago = (time() - filemtime($filename))/60;
         
-        if ($update_sec_ago < 360)
+        //$title = $file[1] . ' - Last update: ' . sinceTime(filemtime($filename));
+        if ($update_sec_ago < 360) // 6h
         {
             $icon = 'green.png';
+            $title = $file[1] . ' - Scanning';
         }
-        elseif ($update_sec_ago < 1440)
+        elseif ($update_sec_ago < 1440) // 1d
         { 
             $icon = 'orange.png';
+            $title = $file[1] . ' - Last added ' . sinceTime(filemtime($filename)) . ' ago';
         }
-        elseif ($update_sec_ago < 10080)
+        elseif ($update_sec_ago < 10080) // 1w
         {
             $icon = 'red.png';
+            $title = $file[1] . ' - Stalled';
         }
         else
         {
             $icon = 'black.png';
+            $title = $file[1] . ' - Paused';
         }
-            $title = $file[1] . ' - Last update: ' . sinceTime(filemtime($filename));
         // $data = file($filename);
         // $line = sinceTime(filemtime($filename)) . " ago:" . $data[count($data)-1];
     } else {
         $icon = 'black.png';
-            $title = $file[1] . ': Currently Paused.';
+            $title = $file[1] . ' - Paused';
     }
     
     echo "<img src='".WWW_TOP."/templates/writhem/images/status/$icon' title='$title'>";
@@ -69,7 +73,6 @@ function sinceTime ($time)
 
     foreach ($tokens as $unit => $text) {
         if ($time < $unit) continue;
-        $unit = 60;
         $numberOfUnits = floor($time / $unit);
         return $numberOfUnits.' '.$text.(($numberOfUnits>1)?'s':'');
     }
