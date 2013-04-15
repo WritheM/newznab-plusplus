@@ -62,13 +62,13 @@
 	</li><br/>					
 
 	<li>
-		<b>CartAdd</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartadd&amp;id=9ca52909ba9b9e5e6758d815fef4ecda">?t=cartadd&amp;id=9ca52909ba9b9e5e6758d815fef4ecda</a></code>
+		<b>CartAdd</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartadd&amp;id={$userdata.rsstoken}">?t=cartadd&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
 		Adds an nzb to a users cart.
 	</li><br/>					
 
 	<li>
-		<b>CartDelete</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartdel&amp;id=9ca52909ba9b9e5e6758d815fef4ecda">?t=cartdel&amp;id=9ca52909ba9b9e5e6758d815fef4ecda</a></code>
+		<b>CartDelete</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartdel&amp;id={$userdata.rsstoken}">?t=cartdel&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
 		Remove an nzb from a users cart.
 	</li><br/>					
@@ -102,17 +102,17 @@
 		Returns a list of nzbs matching a book based query. Include <code>&amp;extended=1</code> to return extended information in the search results. Other search parameters include title.
 	</li><br/>
 	<li>
-		<b>Details</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=details&amp;id=9ca52909ba9b9e5e6758d815fef4ecda">?t=details&amp;id=9ca52909ba9b9e5e6758d815fef4ecda</a></code>
+		<b>Details</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=details&amp;id={$userdata.rsstoken}">?t=details&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
 		Returns detailed information about an nzb.
 	</li><br/>	
 	<li>
-		<b>GetNfo</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=getnfo&amp;id=9ca52909ba9b9e5e6758d815fef4ecda">?t=getnfo&amp;id=9ca52909ba9b9e5e6758d815fef4ecda</a></code>
+		<b>GetNfo</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=getnfo&amp;id={$userdata.rsstoken}">?t=getnfo&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
 		Returns an nfo file for an nzb. Optional parameter <code>&amp;raw=1</code> returns just the nfo file without the rss container.
 	</li><br/>
 	<li>
-		<b>Comments</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=comments&amp;id=9ca52909ba9b9e5e6758d815fef4ecda">?t=comments&amp;id=9ca52909ba9b9e5e6758d815fef4ecda</a></code>
+		<b>Comments</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=comments&amp;id={$userdata.rsstoken}">?t=comments&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
 		Returns comments for an nzb.
 	</li><br/>						
@@ -121,12 +121,12 @@
 <h3>NZB Functions</h3>
 <ul>
 	<li>
-		<b>Get</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=get&amp;id=9ca52909ba9b9e5e6758d815fef4ecda">?t=get&amp;id=9ca52909ba9b9e5e6758d815fef4ecda</a></code>
+		<b>Get</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=get&amp;id={$userdata.rsstoken}">?t=get&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
 		Downloads the nzb file associated with an Id.
 	</li><br/>
 	<li>
-		<b>CommentAdd</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=commentadd&amp;id=9ca52909ba9b9e5e6758d815fef4ecda&amp;text=comment">?t=comments&amp;id=9ca52909ba9b9e5e6758d815fef4ecda&amp;text=comment</a></code>
+		<b>CommentAdd</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=commentadd&amp;id={$userdata.rsstoken}&amp;text=comment">?t=comments&amp;id={$userdata.rsstoken}&amp;text=comment</a></code>
 		<br/>
 		Adds a comment to an nzb.
 	</li><br/>

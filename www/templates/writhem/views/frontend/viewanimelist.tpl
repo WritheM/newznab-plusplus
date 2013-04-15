@@ -1,23 +1,27 @@
 <h1>{$page->title}</h1>
 
-<div style="float:right;">
-
-	<form name="anidbsearch" action="" method="get">
-		<label for="title">Search:</label>
-		&nbsp;&nbsp;<input id="title" type="text" name="title" value="{$animetitle}" size="25" />
-		&nbsp;&nbsp;
-		<input type="submit" value="Go" />
-	</form>
+<div class="pagination pagination-mini">
+  <ul style="padding-bottom:1.5px;">
+    <li{if $animeletter == '0-9'} class="active"{/if}>
+      <a href="{$smarty.const.WWW_TOP}/series/0-9">0-9</a>
+    </li>
+    {foreach $animerange as $range}
+      <li{if $range == $animeletter} class="active"{/if}>
+          <a href="{$smarty.const.WWW_TOP}/series/{$range}">{$range}</a>
+      </li>
+    {/foreach}
+  </ul>
+  <form style="float:right;"class="form-search" name="anidbsearch" action="" method="get">
+    <div class="input-append">
+        <input id="title" name="title" type="text" class="span2 search-query" value="{$animetitle|escape:'html'}" placeholder="Search TV Series">
+        <button type="submit" value="Go" class="btn"><i class="icon-search"></i></button>
+    </div>
+  </form>
 </div>
 
-<p><b>Jump to</b>:
-&nbsp;&nbsp;[ {if $animeletter == '0-9'}<b><u>{/if}<a href="{$smarty.const.WWW_TOP}/anime/0-9">0-9</a>{if $animeletter == '0-9'}</u></b>{/if} 
-{foreach $animerange as $range}
-{if $range == $animeletter}<b><u>{/if}<a href="{$smarty.const.WWW_TOP}/anime/{$range}">{$range}</a>{if $range == $animeletter}</u></b>{/if} 
-{/foreach}]
-</p>
-
-{$site->adbrowse}	
+{if !$userdata.hideads && $site->adbrowse != ""}
+<table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
+{/if}
 
 {if $animelist|@count > 0}
 

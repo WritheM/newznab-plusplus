@@ -3,7 +3,7 @@
 	<li class="active">{$catname|escape:"htmlall"}</li>
 </ul>
 
-{if !$userdata.premium}
+{if !$userdata.hideads && $site->adbrowse != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
 {/if}
 
@@ -90,7 +90,7 @@
 				</a>
 			</th>
 
-			<th style="padding-top:0px; padding-bottom:0px;">files<br/>
+			<th style="padding-top:0px; padding-bottom:0px; min-width:25px;">files<br/>
 				<a title="Sort Descending" href="{$orderbyfiles_desc}">
 					<i class="fa-icon-caret-down"></i>
 				</a>
@@ -99,7 +99,7 @@
 				</a>
 			</th>
 
-			<th style="padding-top:0px; padding-bottom:0px;">stats<br/>
+			<th style="padding-top:0px; padding-bottom:0px; min-width:25px;">stats<br/>
 				<a title="Sort Descending" href="{$orderbystats_desc}">
 					<i class="fa-icon-caret-down"></i>
 				</a>

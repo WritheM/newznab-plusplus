@@ -1,16 +1,4 @@
-
-
-
-
-
- 
-
-
-
-
-
 <h1>Browse Music</h1>
-
 
 <form name="browseby" action="music">
 <table border="0" cellpadding="2" cellspacing="0">
@@ -36,8 +24,6 @@
 						<option {if $gen.ID == $genre}selected="selected"{/if} value="{$gen.ID}">{$gen.title|escape:"htmlall"}</option>
 					{/foreach}
 				</select>
-
-
 			</div>
 		</td>
 		<td>
@@ -49,8 +35,6 @@
 						<option {if $yr==$year}selected="selected"{/if} value="{$yr}">{$yr}</option>
 					{/foreach}
 				</select>
-
-
 			</div>
 		</td>
 	</tr><tr>
@@ -63,10 +47,6 @@
 						<option {if $ct.ID==$category}selected="selected"{/if} value="{$ct.ID}">{$ct.title}</option>
 					{/foreach}
 				</select>
-
-
-
-
 			</div>
 		</td>
 		<td><button class="btn btn-small" type="submit"><i class="icon-filter"></i> Apply Filter</button>
@@ -75,7 +55,7 @@
 </form>
 <p></p>
 
-{if !$donated}
+{if !$userdata.hideads && $site->adbrowse != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
 {/if}
 
@@ -83,11 +63,8 @@
 
 <form id="nzb_multi_operations_form" action="get">
 
-
-
 <table width="100%">
 <tr><td>
-
 
 {$pager}</td>
 	<td style="text-align:right"><div class="nzb_multi_operations">
@@ -97,16 +74,7 @@
 	{if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
 
 
-
-
-
-
-
-
-
-
 	{if $isadmin}
-
 
 		<button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
 		<button type="button" class="btn btn-mini btn-danger nzb_multi_operations_delete"><i class="icon-trash icon-white"></i></button>
@@ -133,7 +101,7 @@
 		<th width="130"><input type="checkbox" class="nzb_check_all" /></th>
 
 
-		<th>Artist<br/><a title="Sort Descending" href="{$orderbyartist_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbyartist_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>Artist<br/><a title="Sort Descending" href="{$orderbyartist_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyartist_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 
 
 
@@ -141,7 +109,7 @@
 
 
 
-		<th>Year<br/><a title="Sort Descending" href="{$orderbyyear_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbyyear_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>Year<br/><a title="Sort Descending" href="{$orderbyyear_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyyear_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 
 
 
@@ -149,7 +117,7 @@
 
 
 
-		<th>Genre<br/><a title="Sort Descending" href="{$orderbygenre_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbygenre_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>Genre<br/><a title="Sort Descending" href="{$orderbygenre_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbygenre_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 
 
 
@@ -157,7 +125,7 @@
 
 
 
-		<th>Posted<br/><a title="Sort Descending" href="{$orderbyposted_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbyposted_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>Posted<br/><a title="Sort Descending" href="{$orderbyposted_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyposted_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 
 
 
@@ -165,7 +133,7 @@
 
 
 
-		<th>Size<br/><a title="Sort Descending" href="{$orderbysize_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbysize_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>Size<br/><a title="Sort Descending" href="{$orderbysize_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbysize_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 
 
 
@@ -173,7 +141,7 @@
 
 
 
-		<th>Files<br/><a title="Sort Descending" href="{$orderbyfiles_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbyfiles_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>Files<br/><a title="Sort Descending" href="{$orderbyfiles_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyfiles_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 
 
 
@@ -181,7 +149,7 @@
 
 
 
-		<th>Stats<br/><a title="Sort Descending" href="{$orderbystats_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbystats_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>Stats<br/><a title="Sort Descending" href="{$orderbystats_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbystats_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 
 
 

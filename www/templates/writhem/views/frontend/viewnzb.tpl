@@ -1,8 +1,7 @@
 
 <h1>{$release.searchname|escape:"htmlall"}</h1>
 
-{if !$userdata.premium}
-<!-- ads -->
+{if !$userdata.hideads && $site->addetail != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->addetail}</td></tr></table><br />
 {/if}
 
@@ -22,7 +21,7 @@
             {if preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|MOD|LOCAL)$/', $predb.nuketype)}
                 {$predb.nuketype}NUKE:{$predb.nukereason}
             {else}
-                NUKE:{$predb.nukereason} [{$predb.nuketype}]
+                {$predb.nukereason} [{$predb.nuketype}]
             {/if}
 		</span>
 	{/if}
@@ -199,11 +198,14 @@
 
 <div class="tab-content">
 	<div class="tab-pane active" id="details">
-		<table class="table " id="detailstable" >				
+		<table class="table " id="detailstable" >			
 			<tr><th>Group:</th><td title="{$release.group_name}"><a title="Browse {$release.group_name}" href="{$smarty.const.WWW_TOP}/browse?g={$release.group_name}">{$release.group_name|replace:"alt.binaries":"a.b"}</a></td></tr>
 			<tr><th>Category:</th><td><a title="Browse by {$release.category_name}" href="{$smarty.const.WWW_TOP}/browse?t={$release.categoryID}">{$release.category_name}</a></td></tr>
 			<tr><th>Size:</th><td>{$release.size|fsize_format:"MB"}{if $release.completion > 0}&nbsp;({if $release.completion < 100}<span class="warning">{$release.completion}%</span>{else}{$release.completion}%{/if}){/if}</td></tr>
 			<tr><th>Grabs:</th><td>{$release.grabs} time{if $release.grabs==1}{else}s{/if}</td></tr>
+      {if $release.name != $release.searchname}
+        <tr><th>Original Name:</th><td title="{$release.name}">{$release.name}</td></tr>
+      {/if}
 			<tr><th>Poster:</th><td>{$release.fromname|escape:"htmlall"}</td></tr>
             {if $predb}
                 <tr><th>Pre:</th><td>{$predb.ctime|date_format:"%b %e, %Y %T"} ({$predb.ctime|daysago})</td></tr>
@@ -499,8 +501,8 @@
 			<tr>
 				<td class="less" title="{$comment.createddate}">
           {if $comment.sourceid == 0}
-            {if $comment.role == 2}<i class="icon-font" title="Administrator"></i>
-            {elseif $comment.role == 6}<i class="icon-certificate" title="User has Donated"></i>
+            {if $comment.role == 2}<i class="icon-font" title="{$comment.rolename}"></i>
+            {elseif $comment.role == 4}<i class="icon-certificate" title="{$comment.rolename}"></i>
             {else}<i class="icon-user" title="Normal User"></i>
             {/if}
             {if $comment.role == 2}<strong>{/if}

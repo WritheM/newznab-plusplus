@@ -10,6 +10,10 @@
 	</div>
 </center>
 
+{if !$userdata.hideads && $site->adbrowse != ""}
+<table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
+{/if}
+
 <table width="100%;">
 	<tr valign="top">
 		<td width="33%";>

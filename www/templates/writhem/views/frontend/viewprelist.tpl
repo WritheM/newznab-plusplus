@@ -49,10 +49,10 @@
 				{if $pre.nuketype != '' && $pre.nukereason != ''}
           <span class="badge label-warning">
               <i class="icon-warning-sign icon-white" title="{$pre.nukereason}"></i>
-              {if preg_match('/^(UN)?((MOD)?NUKE?|DELPRE|MOD|LOCAL)$/', $pre.nuketype)}
-                  {$pre.nuketype}NUKE<!--:{$pre.nukereason}-->
+              {if preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|MOD|LOCAL)$/', $pre.nuketype)}
+                  {$pre.nuketype}:{$pre.nukereason}
               {else}
-                  NUKED<!--:{$pre.nukereason} [{$pre.nuketype}]-->
+                  {$pre.nukereason} [{$pre.nuketype}]
               {/if}
           </span>
 				{/if}

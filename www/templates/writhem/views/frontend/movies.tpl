@@ -72,7 +72,7 @@
 
 <p></p>
 
-{if !$userdata.premium}
+{if !$userdata.hideads && $site->adbrowse != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
 {/if}
 
@@ -107,9 +107,9 @@
 <table style="width:100%;" class="table table-bordered table-striped data highlight icons" id="coverstable">
 	<tr>
 		<th width="130"><input type="checkbox" class="nzb_check_all" /></th>
-		<th>title<br/><a title="Sort Descending" href="{$orderbytitle_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbytitle_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
-		<th>year<br/><a title="Sort Descending" href="{$orderbyyear_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbyyear_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
-		<th>rating<br/><a title="Sort Descending" href="{$orderbyrating_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="" /></a><a title="Sort Ascending" href="{$orderbyrating_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="" /></a></th>
+		<th>title<br/><a title="Sort Descending" href="{$orderbytitle_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbytitle_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
+		<th>year<br/><a title="Sort Descending" href="{$orderbyyear_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyyear_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
+		<th>rating<br/><a title="Sort Descending" href="{$orderbyrating_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyrating_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
 	</tr>
 
 	{foreach from=$results item=result}

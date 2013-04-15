@@ -27,6 +27,9 @@ hr { display: none; }
 
 table.adblock { line-height:0px; width: 728px; height: 90px; background-image: url('/templates/writhem/images/adblock.jpg'); }
 
+.navbar-inner { 
+    width: 900px;
+}
 .navbar-inner.affix { 
     top: -1px; 
     width: 900px; 
