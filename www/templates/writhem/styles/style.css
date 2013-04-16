@@ -27,7 +27,7 @@ img.right { float: right; margin: 7px 0 0 30px; }
 hr { display: none; }
 
 table.adblock { line-height:0px; width: 728px; height: 90px; background-image: url('/templates/writhem/images/adblock.jpg'); }
-
+.table-striped { background-color: #ffffff;}
 .navbar-inner { 
     width: 900px;
 }

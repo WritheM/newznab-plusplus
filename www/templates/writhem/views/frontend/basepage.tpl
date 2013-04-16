@@ -198,13 +198,15 @@
         &copy;{$smarty.now|date_format:"%Y"} {$site->title}, All Rights Reserved. <br/>
 		{$site->footer}
     {if $loggedin=="true"}
-      <br />Powered by <a title="newznab - A usenet indexing web application with community features." href="http://www.newznab.com/">newznab+</a>+ (the extra plus is for all the <a href="https://github.com/WritheM/newznab-plusplus/issues">WritheM Plugins <i class="fa-icon-github-alt"></i></a>)<br/>
-          <a href="{$smarty.const.WWW_TOP}/terms-and-conditions">Terms and Conditions</a> | <a href="{$smarty.const.WWW_TOP}/content/5/">Privacy Policy</a>
-      {if $db_parts[0]['count']>0}
+      <br />Powered by <a title="newznab - A usenet indexing web application with community features." href="http://www.newznab.com/"><i class="fa-icon-plus-sign-alt"></i>newznab+</a> | Front-end by <a href="https://github.com/WritheM/newznab-plusplus/issues"><i class="fa-icon-github-alt"></i> WritheM nn++</a>)<br/>
+        {foreach from=$themevars.footer_links item=link name=links}
+          <a href="{$link[1]}">{$link[0]}</a>{if !$smarty.foreach.links.last} | {/if}
+        {/foreach}
+      {if $dbstats.parts[0]['count']>0}
       <br /><br />
-          Indexing {$db_parts[0]['count']|number_format:0:".":","} Articles, {$db_binaries[0]['count']|number_format:0:".":","} Binaries, and {$db_releases[0]['count']|number_format:0:".":","} Releases.{/if}
+          Indexing {$dbstats.parts[0]['count']|number_format:0:".":","} Articles, {$dbstats.binaries[0]['count']|number_format:0:".":","} Binaries, and {$dbstats.releases[0]['count']|number_format:0:".":","} Releases.{/if}
       <br />
-      {if ($userdata.admin)}
+      {if ($isadmin)}
         ip: | 
         server:{gethostname()}
       {/if}
