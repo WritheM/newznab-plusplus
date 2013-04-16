@@ -14,7 +14,7 @@
 
 {if $data|@count > 0}
 
-<table class="data highlight icons table table-striped" id="coverstable">
+<table class="data highlight icons table table-bordered table-striped" id="coverstable">
 		<tr>
 			<th style="width:140px;"></th>
 			<th>Name</th>
@@ -26,13 +26,11 @@
 				<div class="movcover">
 					<center>
 					<img class="shadow img img-polaroid" src="{$result->posters->profile}" width="120" border="0" alt="{$result->title|escape:"htmlall"}" />
-					</center>
-					<div class="movextra">
-						<center>
-						<a class="rndbtn badge badge-success" target="_blank" href="{$site->dereferrer_link}{$result->links->alternate}" title="View Rotten Tomatoes Details">Rotten</a>
-						<a class="rndbtn badge badge-imdb" target="_blank" href="{$site->dereferrer_link}http://www.imdb.com/title/tt{$result->alternate_ids->imdb}" title="View Imdb Details">Imdb</a>				
-						</center>
+					<div class="movextra btn-group">
+						<a class="btn btn-mini" target="_blank" href="{$site->dereferrer_link}{$result->links->alternate}" title="View Rotten Tomatoes Details">Rotten</a>
+						<a class="btn btn-mini" target="_blank" href="{$site->dereferrer_link}http://www.imdb.com/title/tt{$result->alternate_ids->imdb}" title="View Imdb Details">Imdb</a>				
 					</div>
+					</center>
 				</div>
 			</td>
 			<td colspan="3" class="left">
@@ -50,11 +48,11 @@
 				{/if}
 
 				{if $ourmovies[$result->alternate_ids->imdb] != ""}
-					<a class="rndbtn btn btn-mini btn-success" href="{$smarty.const.WWW_TOP}/movies?imdb={$result->alternate_ids->imdb}">Download</a>
+					<a class="rndbtn btn btn-mini" href="{$smarty.const.WWW_TOP}/movies?imdb={$result->alternate_ids->imdb}">View Movie Downloads</a>
 				{else}
 					<a {if $userimdbs[$result->alternate_ids->imdb] != ""}style="display:none;"{/if} onclick="mymovie_add('{$result->alternate_ids->imdb}', this);return false;" class="rndbtn btn btn-mini btn-info" href="#">Add To My Movies</a>
 				{/if}
-				<a style="display:{if $userimdbs[$result->alternate_ids->imdb] != ""}inline{else}none;{/if}" onclick="mymovie_del('{$result->alternate_ids->imdb}', this);return false;" href="#" class="rndbtn btn btn-mini btn-danger">Remove From My Movies</a>
+				<a style="display:{if $userimdbs[$result->alternate_ids->imdb] != ""}inline{else}none;{/if}" onclick="mymovie_del('{$result->alternate_ids->imdb}', this);return false;" href="#" class="rndbtn btn btn-mini">Remove From My Movies</a>
 				<br/>
 
 

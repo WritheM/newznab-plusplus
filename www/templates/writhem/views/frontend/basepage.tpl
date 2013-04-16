@@ -75,7 +75,6 @@
 					<li><a href="{$smarty.const.WWW_TOP}/logout"><i class="icon-off"></i> Logoff</a></li>
 				</ul>
 			</div>
-			<!--Welcome back <a href="{$smarty.const.WWW_TOP}/profile">{$userdata.username}</a>. <a href="{$smarty.const.WWW_TOP}/logout">Logout</a>-->
 		{else}
 			<a href="{$smarty.const.WWW_TOP}/login">Login</a> or <a href="{$smarty.const.WWW_TOP}/register">Register</a>
 		{/if}
@@ -106,7 +105,7 @@
 	<div id="page">
 		
 		<div id="content">
-			{if gethostname() == 'nasbox'}
+			{if isset($themevars['beta_hostname']) && in_array(gethostname(),$themevars['beta_hostname'])}
                 <script>
                 jQuery(document).ready(function() { 
                     var cookie = $.cookie('hide_beta');
@@ -124,12 +123,12 @@
 				  <strong>Note:</strong> You are on the beta server. Functionality and stability can not be gauranteed.
                 </div>
       {else}
-        {if $userdata.premium && substr($serverroot, 4, 1) != 's'}
+        {if $themevars.warn_non_ssl && $smarty.server.HTTPS != "1"}
           <div id="alert_ssl" class="alert alert-info">
             <button type="button" class="close" onclick="$.cookie('hide_ssl','true');jQuery('#alert_ssl').hide(200);">&times;</button>
             <strong>Warning!</strong> You are not connecting on SSL. Switch now? <a class="btn btn-mini" href="https://{$requesturl}"><i class="icon-refresh"></i> Switch to HTTPS</a>
           </div>
-        {elseif !$userdata.premium && substr($serverroot, 4, 1) == 's' && $loggedin=="true"}
+        {elseif $themevars.warn_non_ssl && $userdata.role != 4 && $userdata.role != 2 && $smarty.server.HTTPS == "1"}
           <div id="alert_ssl" class="alert alert-error">
             <button type="button" class="close" onclick="$.cookie('hide_ssl','true');jQuery('#alert_ssl').hide(200);">&times;</button>
             <strong>Error!</strong> You are connecting on SSL, but have not donated more than the average. Switch now? <a class="btn btn-mini" href="http://{$requesturl}"><i class="icon-refresh"></i> Switch to HTTP</a>
