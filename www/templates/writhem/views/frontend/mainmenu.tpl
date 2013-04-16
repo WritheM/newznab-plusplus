@@ -1,8 +1,8 @@
 {if $menulist|@count > 0} 
 <li class="menu_main">
-    {if $loggedin=="true"}
+    {if $loggedin=="true" && $themevars.update_logs}
     <h2>Realtime Status</h2>
-    <center>{writhem_update_progress}</center>
+    <center>{writhem_update_progress update_logs=$themevars.update_logs}</center>
     {/if}
 	<h2>Menu</h2> 
 	<ul class="nav nav-tabs nav-stacked">

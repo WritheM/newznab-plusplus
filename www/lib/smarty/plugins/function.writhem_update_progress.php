@@ -10,18 +10,10 @@
  */
 function smarty_function_writhem_update_progress($params, Smarty_Internal_Template $template)
 {
-$ER = "rawr";
-
-$folder = '/mnt/adamo/nzbfiles/prologs/';
-$files = array(
-    array('part4.log','Backlog Updater'),
-    array('part1.log','Binary Updater'),
-    array('part2.log','Release Updater'),
-    array('part3.log','MediaInfo Updater')
-    );
+$files = $params['update_logs'];
 
 foreach ($files as $file) {
-    $filename = $folder . $file[0];
+    $filename = $file[0];
     if (file_exists($filename)) {
         $update_sec_ago = (time() - filemtime($filename))/60;
         
