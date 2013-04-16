@@ -31,7 +31,7 @@
         <button type="button" class="btn btn-mini nzb_multi_operations_download"><i class="icon-download"></i> Download NZBs</button>
         <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="icon-bookmark"></i> Bookmark</button>
         {if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
-        {if $userdata.admin}
+        {if $isadmin}
           <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
           <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_delete"><i class="icon-trash icon-white"></i></button>
           <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_rebuild"><i class="icon-repeat icon-white"></i></button>
@@ -112,6 +112,7 @@
 
 		{foreach from=$results item=result}
     {writhem_assign_reAudio id=$result["ID"]}
+
 		<tr class="{if $lastvisit|strtotime<$result.adddate|strtotime}success{/if}" id="guid{$result.guid}">
 			<td class="check"><input id="chk{$result.guid|substr:0:7}" type="checkbox" class="nzb_check" value="{$result.guid}" /></td>
 			<td class="item">
@@ -129,18 +130,15 @@
 				
 				<div class="resextra">
 					<div class="btn-group">{strip}
-            {$result|print_r}
 						{if $result.nfoID > 0}<a href="{$smarty.const.WWW_TOP}/nfo/{$result.guid}" title="View Nfo" class="modal_nfo btn btn-mini" rel="nfo">Nfo</a>{/if}
 						{if $result.preID > 0 && $userdata.canpre == 1}<span class="preinfo btn btn-mini disabled" title="{$result.searchname}">Pre'd {$result.ctime|timeago}</span>{/if}
 						{if $result.movieinfoID > 0}<a href="{$smarty.const.WWW_TOP}/movies?imdb={$result.imdbID}" title="View movie info" class="btn btn-mini" rel="movie" >Movie</a>{/if}
 						{if $result.haspreview == 1}
               {if $userdata.canpreview == 1}<a href="{$smarty.const.WWW_TOP}/covers/preview/{$result.guid}_thumb.jpg" name="name{$result.guid}" title="View Screenshot" class="modal_prev btn btn-mini" rel="preview">Preview</a>
-              {elseif !$userdata.premium}<a href="{$smarty.const.WWW_TOP}/templates/writhem/images/cantpreview_thumb.jpg" name="name{$result.guid}" title="View Screenshot" class="modal_prev btn btn-mini" rel="preview">Preview</a>
               {/if}
             {/if}
 						{if $result.haspreview == 2}
               {if $userdata.canpreview == 1}<a href="#" name="audio{$result.guid}" title="Listen to Preview" class="audioprev btn btn-mini" rel="audio">Listen</a><audio id="audprev{$result.guid}" src="{$smarty.const.WWW_TOP}/covers/audio/{$result.guid}.mp3" preload="none"></audio>
-              {elseif !$userdata.premium}<a href="{$smarty.const.WWW_TOP}/templates/writhem/images/cantpreview_thumb.jpg" name="name{$result.guid}" title="View Screenshot" class="modal_prev btn btn-mini" rel="preview">Listen</a>
               {/if}
             {/if}
 						{if $result.musicinfoID > 0}<a href="#" name="name{$result.musicinfoID}" title="View music info" class="modal_music btn btn-mini" rel="music" >Cover</a>{/if}

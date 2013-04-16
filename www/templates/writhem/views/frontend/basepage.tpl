@@ -15,11 +15,6 @@
 	<title>{$page->meta_title}{if $page->meta_title != "" && $site->metatitle != ""} - {/if}{$site->metatitle}</title>
 {if $loggedin=="true"}	<link rel="alternate" type="application/rss+xml" title="{$site->title} Full Rss Feed" href="{$smarty.const.WWW_TOP}/rss?t=0&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}" />{/if}
 
-
-
-
-
-
 {if $site->google_adsense_acc != ''}	
 	<link href="http://www.google.com/cse/api/branding.css" rel="stylesheet" type="text/css" media="screen" />
 {/if}
@@ -94,11 +89,7 @@
 
 		<h1><a href="{$smarty.const.WWW_TOP}{$site->home_link}">{$site->title}</a></h1>
 		{if $loggedin=="true"}<p><em>{$site->strapline}</em></p>{/if}
-		
-		<!--{if !$donated}
-		<table class="adblock" cellspacing="0" cellpadding="0"><tr><td>-->{$site->adheader}<!--</td></tr></table><br />
-		{/if}-->
-		
+				
 	</div>
 	<hr />
 	
@@ -106,32 +97,8 @@
 		<div id="menu"> 
 
 			{if $loggedin=="true"}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 				{$header_menu}
 			{/if}
-
-
-
-
-
-
-
 						
 		</div> 
 	</div>
@@ -178,15 +145,6 @@
 			{$page->content}
 		</div>
 
-
-
-
-
-
-
-
-
-
 		<div id="sidebar">
 			<ul>		
 			
@@ -213,9 +171,6 @@
 					        <input type="text" name="q" size="10" />
 					        <input type="submit" name="sa" value="Search" />
 					      </div>
-
-
-
 					    </form>
 					  </div>
 
@@ -226,12 +181,6 @@
 					    Custom Search
 					  </div>
 					</div>
-
-
-
-
-
-
 
 				</div>
 				</li>		

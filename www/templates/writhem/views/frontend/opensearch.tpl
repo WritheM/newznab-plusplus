@@ -8,6 +8,6 @@
 	<InputEncoding>UTF-8</InputEncoding>
 	<moz:SearchForm>{$serverroot}</moz:SearchForm>
 	<moz:UpdateUrl>{$serverroot}opensearch</moz:UpdateUrl>
-	<moz:IconUpdateUrl>{$serverroot}templates/default/images/favicon.ico</moz:IconUpdateUrl>
+	<moz:IconUpdateUrl>{$serverroot}templates/writhem/images/favicon.ico</moz:IconUpdateUrl>
 	<moz:UpdateInterval>7</moz:UpdateInterval>
 </OpenSearchDescription>

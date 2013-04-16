@@ -3,7 +3,7 @@
 <div style="float:right;margin-bottom:5px;">
 </div>
 
-{if !$userdata.premium}
+{if !$userdata.hideads && $site->adbrowse != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
 {/if}
 
@@ -57,7 +57,7 @@
           </span>
 				{/if}
 			</td>
-			<td class="mid"><a href="{$smarty.const.WWW_TOP}/predb?c={$pre.category}">{$pre.category}</a></td>
+			<td class="mid"><a href="?c={$pre.category}">{$pre.category}</a></td>
 			<td class="mid">{if $pre.filesize > 0}{$pre.filesize}MB{if $pre.filecount > 0}/{$pre.filecount}F{/if}{else}--{/if}</td>
 		</tr>
 	{/foreach}

@@ -1,5 +1,7 @@
 <div class="page-header">
 	<h1>Add to category</h1>
+When you add a show to your list of followed shows, you can filter the results in 
+your collection to a certain category. Select them now:
 </div>
 <h3>{$type|ucwords} {$show.releasetitle|escape:"htmlall"} in</h3>
 

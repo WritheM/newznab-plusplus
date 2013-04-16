@@ -366,8 +366,20 @@ jQuery(function($){
 	});
 	$('#searchraw_download_selected').click(function(){
 		if ($('#dl input:checked').length)
+        {
 			$('#dl').trigger('submit');
-		return false;
+            
+            // var newFormName = 'nzbmulti' + Math.round(+new Date()/1000);
+            // var newForm = $("<form />", {'action': SERVERROOT + 'getnzb?zip=1', 'method':'post', 'target': '_top', 'id':newFormName});
+            // $("table.data INPUT[type='checkbox']:checked").each( function(i, row) {
+                // if ($(row).val()!="on")
+                    // $("<input />", {'name':'id[]', 'value':$(row).val(), 'type':'hidden'}).appendTo(newForm);
+            // });
+            // newForm.appendTo($('body'));
+            // $('#'+newFormName).submit();
+
+            return false;
+        }
 	});
 
 	// login.tpl, register.tpl, search.tpl, searchraw.tpl

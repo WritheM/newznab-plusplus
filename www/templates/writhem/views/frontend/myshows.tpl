@@ -26,10 +26,10 @@
 			</td>
 			<td class="less">{if $show.categoryNames != ''}{$show.categoryNames|escape:"htmlall"}{else}All{/if}</td>
 			<td class="less" style="width:100px;" title="Added on {$show.createddate}">{$show.createddate|date_format}</td>
-			<td class="mid" style="width:100px;">
+			<td class="mid" style="width:50px;">
 				<div class="btn-group">
-					<a class="btn btn-mini btn-warning" href="{$smarty.const.WWW_TOP}/myshows/edit/{$show.rageID}" class="myshows" rel="edit" name="series{$show.rageID}" title="Edit Categories">Edit</a>&nbsp;&nbsp;
-					<a class="btn btn-mini btn-danger" href="{$smarty.const.WWW_TOP}/myshows/delete/{$show.rageID}" class="myshows" rel="remove" name="series{$show.rageID}" title="Remove from My Shows">Remove</a>
+					<a class="btn btn-mini" href="{$smarty.const.WWW_TOP}/myshows/edit/{$show.rageID}" class="myshows" rel="edit" name="series{$show.rageID}" title="Edit Categories"><i class="icon-edit"></i></a>&nbsp;&nbsp;
+					<a class="btn btn-mini" href="{$smarty.const.WWW_TOP}/myshows/delete/{$show.rageID}" class="myshows" rel="remove" name="series{$show.rageID}" title="Remove from My Shows"><i class="icon-minus-sign"></i></a>
 				</div>
 				</td>
 		</tr>

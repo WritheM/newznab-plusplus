@@ -7,16 +7,16 @@
 	</p>
 </div>
 
-<div class="navbar">
-	<div class="navbar-inner">
-		<form id="frmMyMovieLookup" class="navbar-form pull-left">
-			<div class="input-append">
-				<input class="input-xlarge" type="text" id="txtsearch" placeholder="Movie Title or IMDB Id" />
-				<input id="btnsearch" class="btn" type="submit" value="Search" />
-			</div>
-		</form>
-	</div>
-</div>
+{if !$userdata.hideads && $site->adbrowse != ""}
+<table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
+{/if}
+
+<form id="frmMyMovieLookup" class="navbar-form pull-right">
+  <div class="input-append">
+    <input class="input-xlarge" type="text" id="txtsearch" placeholder="Movie Title or IMDB Id" />
+    <input id="btnsearch" class="btn" type="submit" value="Search" />
+  </div>
+</form>
 
 <div id="divMovResults">
 </div>

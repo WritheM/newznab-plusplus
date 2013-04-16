@@ -15,7 +15,7 @@
         <div class="input-append">
           <input class="input" id="search" value="{$search|escape:'html'}" type="text"/>
                   
-          <a id="bbasic" class="btn" onclick="jQuery('#sadvanced,#bbasic,#badvanced').toggle();jQuery('#search_type').val('adv');" {if $sadvanced}style="display:none"{/if}><i class="icon-plus"></i></a>
+          <a id="bbasic" class="btn" onclick="jQuery('#sadvanced,#bbasic,#badvanced').toggle();jQuery('#search_type').val('adv');" {if $sadvanced || true}style="display:none"{/if}><i class="icon-plus"></i></a>
           <a id="badvanced" class="btn active" onclick="jQuery('#sadvanced,#bbasic,#badvanced').toggle();jQuery('#search_type').val('basic');" {if not $sadvanced}style="display:none"{/if}><i class="icon-minus"></i></a>
               
           <button type="submit" id="search_submit" class="btn">
@@ -87,8 +87,8 @@
 {elseif $search == ""}
 {else}
 
-{if !$userdata.premium}
-  <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
+{if !$userdata.hideads && $site->adbrowse != ""}
+<table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
 {/if}
 
 <form style="padding-top:10px;" id="nzb_multi_operations_form" method="get" action="{$smarty.const.WWW_TOP}/search">
@@ -110,7 +110,7 @@
               <i class="icon-download-alt"></i> Send to SAB
             </button>
             {/if}
-            {if $userdata.admin}
+            {if $isadmin}
             <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit">
               <i class="icon-edit icon-white"></i>
             </button>
@@ -130,12 +130,12 @@
     <tr>
       <thead>
         <th style="padding:2px;"><input id="chkSelectAll" type="checkbox" class="nzb_check_all" /><label for="chkSelectAll" style="display:none;">Select All</label></th>
-        <th>name<br/><a title="Sort Descending" href="{$orderbyname_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="Sort Descending" /></a><a title="Sort Ascending" href="{$orderbyname_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="Sort Ascending" /></a></th>
-        <th>category<br/><a title="Sort Descending" href="{$orderbycat_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="Sort Descending" /></a><a title="Sort Ascending" href="{$orderbycat_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="Sort Ascending" /></a></th>
-        <th>posted<br/><a title="Sort Descending" href="{$orderbyposted_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="Sort Descending" /></a><a title="Sort Ascending" href="{$orderbyposted_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="Sort Ascending" /></a></th>
-        <th>size<br/><a title="Sort Descending" href="{$orderbysize_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="Sort Descending" /></a><a title="Sort Ascending" href="{$orderbysize_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="Sort Ascending" /></a></th>
-        <th>files<br/><a title="Sort Descending" href="{$orderbyfiles_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="Sort Descending" /></a><a title="Sort Ascending" href="{$orderbyfiles_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="Sort Ascending" /></a></th>
-        <th>stats<br/><a title="Sort Descending" href="{$orderbystats_desc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_down.gif" alt="Sort Descending" /></a><a title="Sort Ascending" href="{$orderbystats_asc}"><img src="{$smarty.const.WWW_TOP}/views/images/sorting/arrow_up.gif" alt="Sort Ascending" /></a></th>
+        <th>name<br/><a title="Sort Descending" href="{$orderbyname_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyname_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
+        <th>category<br/><a title="Sort Descending" href="{$orderbycat_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbycat_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
+        <th>posted<br/><a title="Sort Descending" href="{$orderbyposted_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyposted_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
+        <th>size<br/><a title="Sort Descending" href="{$orderbysize_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbysize_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
+        <th style="min-width:30px;">files<br/><a title="Sort Descending" href="{$orderbyfiles_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbyfiles_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
+        <th style="min-width:30px;">stats<br/><a title="Sort Descending" href="{$orderbystats_desc}"><i class="fa-icon-caret-down" title="desc"></i></a><a title="Sort Ascending" href="{$orderbystats_asc}"><i class="fa-icon-caret-up" title="asc"></i></a></th>
         <th></th>
       </thead>
     </tr>
@@ -154,10 +154,9 @@
 				{/if}
         {if $userdata.canpre == 1 && $result.nuketype != ''}
           <div class="badge label-warning">
-            <!--<tr><th>Pre:</th><td>{$predb.ctime|date_format:"%b %e, %Y %T"} ({$predb.ctime|daysago})</td></tr>-->
             <i class="icon-warning-sign icon-white" title="{$predb.nukereason}"></i>
-            {if preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|MOD|LOCAL)$/', $predb.nuketype)}
-                {$predb.nuketype|lower|capitalize}
+            {if preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|MOD|LOCAL)$/', $result.nuketype)}
+                {$result.nuketype|lower|capitalize}
             {/if}
           </div>
         {/if}
@@ -226,7 +225,7 @@
           {if $sabintegrated}
           <button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>
           {/if}
-          {if $userdata.admin}
+          {if $isadmin}
             <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
             <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_delete"><i class="icon-trash icon-white"></i></button>
             <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_rebuild"><i class="icon-repeat icon-white"></i></button>
