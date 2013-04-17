@@ -22,7 +22,7 @@
 	{foreach from=$results item=result name=result}
 		<tr class="{cycle values=",alt"}">
 			<td width="15%;">
-				{if $result.isadmin}<i class="icon-font" title="Administrator"></i>
+				{if $result.isadmin}<i class="icon-font" title="{$result|print_r}"></i>
 				{elseif $result.isdonator}<i class="icon-certificate" title="User has Donated"></i>
 				{else}<i class="icon-user" title="Normal User"></i>
 				{/if}

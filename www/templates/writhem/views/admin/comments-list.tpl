@@ -21,7 +21,7 @@
     {if $comment.userID != 0}
 		<td><a href="{$smarty.const.WWW_TOP}/user-edit.php?id={$comment.userID}">{$comment.username}</a></td>
     {else}
-		<td>{$comment.username} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}">{writhem_spotnab_name id=$comment.sourceid}</a></td>
+		<td>{$comment.username} @<a href="{$smarty.const.WWW_TOP}/spotnab-edit.php?id={$comment.sourceid}">{writhem_spotnab_name id=$comment.sourceid}</a></td>
     {/if}
 		<td title="{$comment.createddate}">{$comment.createddate|date_format}</td>
 		<td>{$comment.text|escape:"htmlall"|nl2br}</td>

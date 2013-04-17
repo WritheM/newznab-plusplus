@@ -191,7 +191,7 @@
 	{if ($release.haspreview == 1 && $userdata.canpreview == 1) || ($release.haspreview == 2 && $userdata.canpreview == 1)}
 		<li><a href="#preview" data-toggle="tab" style="color: black;"><i class="icon-picture"></i> Preview</a></li>
 	{/if}
-	{if $userdata.admin}
+	{if $isadmin}
 		<li><a href="#admin" data-toggle="tab" style="color: black;"><i class="icon-font"></i> Admin Info</a></li>
 	{/if}
 </ul>
@@ -509,7 +509,7 @@
             <a title="View {$comment.username}'s profile" href="{$smarty.const.WWW_TOP}/profile?name={$comment.username}">{$comment.username}</a>
             {if $comment.role == 2}</strong>{/if}
           {else}
-            {if $userdata.admin}
+            {if $isadmin}
              <i class="icon-globe" title="Syndicated User"></i> {$comment.username} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}">{writhem_spotnab_name id=$comment.sourceid}</a>
             {else}
              <i class="icon-globe" title="Syndicated User"></i> {$comment.username}

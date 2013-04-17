@@ -64,9 +64,11 @@
 		<div class="container">
 			<p>{$site->footer} All rights reserved {$smarty.now|date_format:"%Y"}</p>
 			<ul class="footer-links">
-				<li><a href="//github.com/Frikish/">Themed by Frikish <i class="fa-icon-github-alt"></i></a></li>
-				<li class="muted">·</li>
-				<li><a href="{$smarty.const.WWW_TOP}/terms-and-conditions">{$site->title} terms and conditions</a></li>
+        <li>Powered by <a title="newznab - A usenet indexing web application with community features." href="http://www.newznab.com/">newznab+ <i class="fa-icon-plus-sign-alt"></i></a></li>
+        <li class="muted">·</li>
+				<li>Admin Theme by <a href="//github.com/Frikish/">Frikish <i class="fa-icon-github-alt"></i></a></li>
+        <li class="muted">·</li>
+        <li>Front-end by <a href="{$themevars.theme_link}">{$themevars.theme_title} <i class="fa-icon-github-alt"></i></a></li>
 			</ul>
 		</div>
 	</footer>

@@ -126,7 +126,7 @@
         {if $themevars.warn_non_ssl && $smarty.server.HTTPS != "1"}
           <div id="alert_ssl" class="alert alert-info">
             <button type="button" class="close" onclick="$.cookie('hide_ssl','true');jQuery('#alert_ssl').hide(200);">&times;</button>
-            <strong>Warning!</strong> You are not connecting on SSL. Switch now? <a class="btn btn-mini" href="https://{$requesturl}"><i class="icon-refresh"></i> Switch to HTTPS</a>
+            <strong>Warning!</strong> You are not connecting on SSL. Switch now? <a class="btn btn-mini" href="https://{$smarty.server.REQUEST_URI}"><i class="icon-refresh"></i> Switch to HTTPS</a>
           </div>
         {elseif $themevars.warn_non_ssl && $userdata.role != 4 && $userdata.role != 2 && $smarty.server.HTTPS == "1"}
           <div id="alert_ssl" class="alert alert-error">

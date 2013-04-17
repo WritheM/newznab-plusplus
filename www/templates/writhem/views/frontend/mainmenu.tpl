@@ -49,7 +49,9 @@
                     </ul>
                 </li>
             {else}
-                <li class="mmenu{if $menu.newwindow =="1"}_new{/if}"><a {if $menu.newwindow =="1"}class="external" target="null"{/if} title="{$menu.tooltip}" href="{$menu.href}">{$menu.title}</a></li>
+                <li class="tint mmenu{if $menu.newwindow =="1"}_new{/if}">
+                  <a {if $menu.newwindow =="1"}class="external" target="_blank"{/if} title="{$menu.tooltip}" href="{$menu.href}">{$menu.title}</a>
+                </li>
             {/if}
 		{/if}
 	{/foreach}

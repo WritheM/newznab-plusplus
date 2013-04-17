@@ -2,7 +2,6 @@
 	<h2>{$page->title}</h2>
 </div>
 
-
 <form class="form-horizontal" enctype="multipart/form-data" action="{$SCRIPT_NAME}?action=submit" method="POST">
 
 	<input type="hidden" name="from" value="{$smarty.get.from}" />
@@ -53,6 +52,7 @@
 		<label class="control-label" ></label>
 		<div class="controls">
 			<input class="btn btn-success" type="submit" value="Save" />
+      <a href="{$smarty.const.WWW_TOP}/spotnab-list.php?id={$source.ID}&toggle={if $source.active=="1"}0" class="btn btn-warning"{else}1" class="btn btn-success"{/if} >{if $source.active=="1"}Deactivate{else}Activate{/if}</a>
 		</div>
 	</div>
 
