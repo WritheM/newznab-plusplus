@@ -1,104 +1,164 @@
-55a56,59
->         
->         if (file_exists(WWW_DIR.'templates/'.$this->site->style.'/theme.php'))
->             require_once(WWW_DIR.'templates/'.$this->site->style.'/theme.php');
->         $this->smarty->assign('themevars', (isset($themevars) ? $themevars : null));
-67a72,73
->             // default content for logged in users.
->             $this->page = (isset($_GET['page'])) ? $_GET['page'] : ltrim($this->site->home_link, '/');
-100a107,109
->             // default content for unlogged in users.
->             $this->page = (isset($_GET['page'])) ? $_GET['page'] : 'content';
-> 
-289c289
-< 		$sql = sprintf("select users.*, userroles.name as rolename, userroles.canpreview, userroles.canpre, userroles.apirequests, userroles.downloadrequests, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
----
-> 		$sql = sprintf("select users.*, userroles.name as rolename, userroles.*, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
-37,39c37,42
-< 	$page->content = $page->smarty->fetch('viewfilelist.tpl');
-< 	$page->render();
-< }
----
-> 	$modal = false;
-> 	if (isset($_GET['modal'])) 
-> 	{
-> 		$modal = true;
-> 		$page->smarty->assign('modal', true);
-> 	}
-40a44,50
-> 	$page->content = $page->smarty->fetch('viewfilelist.tpl');
-> 	
-> 	if ($modal)
-> 		echo $page->content;
-> 	else
-> 		$page->render();
-> }
+*** www/lib/framework/basepage.php	Mon Apr 15 22:44:34 2013
+--- www/lib/framework/basepage.php	Tue Apr 16 14:36:50 2013
+***************
+*** 53,58 ****
+--- 53,62 ----
+  		
+  		$this->smarty->assign('site', $this->site);
+  		$this->smarty->assign('page', $this);
++         
++         if (file_exists(WWW_DIR.'templates/'.$this->site->style.'/theme.php'))
++             require_once(WWW_DIR.'templates/'.$this->site->style.'/theme.php');
++         $this->smarty->assign('themevars', (isset($themevars) ? $themevars : null));
+  		
+  		if (isset($_SERVER["SERVER_NAME"]))
+  		{
+***************
+*** 65,70 ****
+--- 69,76 ----
+  		$users = new Users();
+  		if ($users->isLoggedIn())
+  		{
++             // default content for logged in users.
++             $this->page = (isset($_GET['page'])) ? $_GET['page'] : ltrim($this->site->home_link, '/');
+  			$this->userdata = $users->getById($users->currentUserId());
+  			
+  			//
+***************
+*** 98,103 ****
+--- 104,112 ----
+  		}
+  		else
+  		{
++             // default content for unlogged in users.
++             $this->page = (isset($_GET['page'])) ? $_GET['page'] : 'content';
++ 
+  			$this->smarty->assign('isadmin',"false");	
+  			$this->smarty->assign('loggedin',"false");	
+  			$this->floodCheck(false, "");
+*** www/lib/users.php	Mon Apr 15 22:44:34 2013
+--- www/lib/users.php	Mon Apr 15 12:54:50 2013
+***************
+*** 286,292 ****
+  	public function getById($id)
+  	{			
+  		$db = new DB();
+! 		$sql = sprintf("select users.*, userroles.name as rolename, userroles.canpreview, userroles.canpre, userroles.apirequests, userroles.downloadrequests, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
+  		return $db->queryOneRow($sql);		
+  	}	
+  	
+--- 286,292 ----
+  	public function getById($id)
+  	{			
+  		$db = new DB();
+! 		$sql = sprintf("select users.*, userroles.name as rolename, userroles.*, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
+  		return $db->queryOneRow($sql);		
+  	}	
+  	
+*** www/pages/filelist.php	Mon Apr 15 22:46:34 2013
+--- www/pages/filelist.php	Mon Apr 15 17:55:50 2013
+***************
+*** 34,40 ****
+  	$page->meta_keywords = "view,nzb,file,list,description,details";
+  	$page->meta_description = "View Nzb File List";
+  	
+! 	$page->content = $page->smarty->fetch('viewfilelist.tpl');
+! 	$page->render();
+! }
+  
+--- 34,50 ----
+  	$page->meta_keywords = "view,nzb,file,list,description,details";
+  	$page->meta_description = "View Nzb File List";
+  	
+! 	$modal = false;
+! 	if (isset($_GET['modal'])) 
+! 	{
+! 		$modal = true;
+! 		$page->smarty->assign('modal', true);
+! 	}
+  
++ 	$page->content = $page->smarty->fetch('viewfilelist.tpl');
++ 	
++ 	if ($modal)
++ 		echo $page->content;
++ 	else
++ 		$page->render();
++ }
 \ No newline at end of file
-18,79c18,21
-< switch($page->page) {
-< 	case 'content':
-< 	case 'sendtosab':
-< 	case 'dlbrowse':
-< 	case 'browse':
-< 	case 'books':
-< 	case 'browsegroup':
-< 	case 'getnzb':
-< 	case 'search':
-< 	case 'searchraw':
-< 	case 'rss':
-< 	case 'api':
-< 	case 'apihelp':
-< 	case 'movies':
-< 	case 'movie':
-< 	case 'series':
-< 	case 'anime':
-< 	case 'music':
-< 	case 'opensearch':
-< 	case 'musicmodal':
-< 	case 'consolemodal':
-< 	case 'bookmodal':
-< 	case 'console':
-< 	case 'nfo':
-< 	case 'predb':
-< 	case 'details':
-< 	case 'forum':
-< 	case 'forumpost':
-< 	case 'filelist':
-< 	case 'getimage':
-< 	case 'cart':
-< 	case 'myshows':
-< 	case 'mymovies':
-< 	case 'mymoviesedit':
-< 	case 'queue':
-< 	case 'queuedata':
-< 	case 'profile':
-< 	case 'profileedit':
-< 	case 'login':
-< 	case 'logout':
-< 	case 'register':
-< 	case 'forgottenpassword':
-< 	case 'sitemap':
-< 	case 'contact-us':
-< 	case 'terms-and-conditions':
-< 	case 'ajax_profile':
-< 	case 'ajax_release-admin':
-< 	case 'ajax_resetusergrabs-admin':
-< 	case 'ajax_rarfilelist':
-< 	case 'ajax_tvinfo':
-< 	case 'ajax_mediainfo':
-< 	case 'ajax_mymovies':
-< 	case 'ajax_preinfo':
-< 	case 'calendar':
-<     case 'nzbvortex':
-< 	case 'upcoming':
-< 		include(WWW_DIR.'pages/'.$page->page.'.php');
-< 	break;
-< 	default:
-< 		$page->show404();
-< 	break;
-< }
----
-> if (file_exists(WWW_DIR.'pages/'.$page->page.'.php'))
->     include(WWW_DIR.'pages/'.$page->page.'.php');
-> else
->     $page->show404();
+*** www/index.php	Mon Apr 15 23:44:50 2013
+--- www/index.php	Wed Apr 17 14:50:40 2013
+***************
+*** 15,79 ****
+  $page = new Page;
+  $users = new Users;
+  
+! switch($page->page) {
+! 	case 'content':
+! 	case 'sendtosab':
+! 	case 'dlbrowse':
+! 	case 'browse':
+! 	case 'books':
+! 	case 'browsegroup':
+! 	case 'getnzb':
+! 	case 'search':
+! 	case 'searchraw':
+! 	case 'rss':
+! 	case 'api':
+! 	case 'apihelp':
+! 	case 'movies':
+! 	case 'movie':
+! 	case 'series':
+! 	case 'anime':
+! 	case 'music':
+! 	case 'opensearch':
+! 	case 'musicmodal':
+! 	case 'consolemodal':
+! 	case 'bookmodal':
+! 	case 'console':
+! 	case 'nfo':
+! 	case 'predb':
+! 	case 'details':
+! 	case 'forum':
+! 	case 'forumpost':
+! 	case 'filelist':
+! 	case 'getimage':
+! 	case 'cart':
+! 	case 'myshows':
+! 	case 'mymovies':
+! 	case 'mymoviesedit':
+! 	case 'queue':
+! 	case 'queuedata':
+! 	case 'profile':
+! 	case 'profileedit':
+! 	case 'login':
+! 	case 'logout':
+! 	case 'register':
+! 	case 'forgottenpassword':
+! 	case 'sitemap':
+! 	case 'contact-us':
+! 	case 'terms-and-conditions':
+! 	case 'ajax_profile':
+! 	case 'ajax_release-admin':
+! 	case 'ajax_resetusergrabs-admin':
+! 	case 'ajax_rarfilelist':
+! 	case 'ajax_tvinfo':
+! 	case 'ajax_mediainfo':
+! 	case 'ajax_mymovies':
+! 	case 'ajax_preinfo':
+! 	case 'calendar':
+!     case 'nzbvortex':
+! 	case 'upcoming':
+! 		include(WWW_DIR.'pages/'.$page->page.'.php');
+! 	break;
+! 	default:
+! 		$page->show404();
+! 	break;
+! }
+--- 15,21 ----
+  $page = new Page;
+  $users = new Users;
+  
+! if (file_exists(WWW_DIR.'pages/'.$page->page.'.php'))
+!     include(WWW_DIR.'pages/'.$page->page.'.php');
+! else
+!     $page->show404();
