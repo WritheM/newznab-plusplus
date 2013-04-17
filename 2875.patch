@@ -1,0 +1,104 @@
+55a56,59
+>         
+>         if (file_exists(WWW_DIR.'templates/'.$this->site->style.'/theme.php'))
+>             require_once(WWW_DIR.'templates/'.$this->site->style.'/theme.php');
+>         $this->smarty->assign('themevars', (isset($themevars) ? $themevars : null));
+67a72,73
+>             // default content for logged in users.
+>             $this->page = (isset($_GET['page'])) ? $_GET['page'] : ltrim($this->site->home_link, '/');
+100a107,109
+>             // default content for unlogged in users.
+>             $this->page = (isset($_GET['page'])) ? $_GET['page'] : 'content';
+> 
+289c289
+< 		$sql = sprintf("select users.*, userroles.name as rolename, userroles.canpreview, userroles.canpre, userroles.apirequests, userroles.downloadrequests, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
+---
+> 		$sql = sprintf("select users.*, userroles.name as rolename, userroles.*, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
+37,39c37,42
+< 	$page->content = $page->smarty->fetch('viewfilelist.tpl');
+< 	$page->render();
+< }
+---
+> 	$modal = false;
+> 	if (isset($_GET['modal'])) 
+> 	{
+> 		$modal = true;
+> 		$page->smarty->assign('modal', true);
+> 	}
+40a44,50
+> 	$page->content = $page->smarty->fetch('viewfilelist.tpl');
+> 	
+> 	if ($modal)
+> 		echo $page->content;
+> 	else
+> 		$page->render();
+> }
+\ No newline at end of file
+18,79c18,21
+< switch($page->page) {
+< 	case 'content':
+< 	case 'sendtosab':
+< 	case 'dlbrowse':
+< 	case 'browse':
+< 	case 'books':
+< 	case 'browsegroup':
+< 	case 'getnzb':
+< 	case 'search':
+< 	case 'searchraw':
+< 	case 'rss':
+< 	case 'api':
+< 	case 'apihelp':
+< 	case 'movies':
+< 	case 'movie':
+< 	case 'series':
+< 	case 'anime':
+< 	case 'music':
+< 	case 'opensearch':
+< 	case 'musicmodal':
+< 	case 'consolemodal':
+< 	case 'bookmodal':
+< 	case 'console':
+< 	case 'nfo':
+< 	case 'predb':
+< 	case 'details':
+< 	case 'forum':
+< 	case 'forumpost':
+< 	case 'filelist':
+< 	case 'getimage':
+< 	case 'cart':
+< 	case 'myshows':
+< 	case 'mymovies':
+< 	case 'mymoviesedit':
+< 	case 'queue':
+< 	case 'queuedata':
+< 	case 'profile':
+< 	case 'profileedit':
+< 	case 'login':
+< 	case 'logout':
+< 	case 'register':
+< 	case 'forgottenpassword':
+< 	case 'sitemap':
+< 	case 'contact-us':
+< 	case 'terms-and-conditions':
+< 	case 'ajax_profile':
+< 	case 'ajax_release-admin':
+< 	case 'ajax_resetusergrabs-admin':
+< 	case 'ajax_rarfilelist':
+< 	case 'ajax_tvinfo':
+< 	case 'ajax_mediainfo':
+< 	case 'ajax_mymovies':
+< 	case 'ajax_preinfo':
+< 	case 'calendar':
+<     case 'nzbvortex':
+< 	case 'upcoming':
+< 		include(WWW_DIR.'pages/'.$page->page.'.php');
+< 	break;
+< 	default:
+< 		$page->show404();
+< 	break;
+< }
+---
+> if (file_exists(WWW_DIR.'pages/'.$page->page.'.php'))
+>     include(WWW_DIR.'pages/'.$page->page.'.php');
+> else
+>     $page->show404();
