@@ -1,12 +1,9 @@
-misc/*
-!misc/update_scripts/update_teevee.php
 www/admin
 www/covers
 www/install
 www/*.*
 www/lib/*
 !www/lib/news.php
-!www/lib/teevee.php
 !www/lib/smarty/plugins/*.writhem_*
 www/pages/*
 !www/pages/news.php
