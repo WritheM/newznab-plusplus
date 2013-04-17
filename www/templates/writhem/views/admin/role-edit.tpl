@@ -56,12 +56,20 @@
 		</div>
 	</div>
 	
+	<div class="control-group">
+		<label class="control-label" for="hideadvert">Hide Ads</label>
+		<div class="controls">
+			{html_radios id="hideadvert" name='hideadvert' values=$yesno_ids output=$yesno_names selected=$role.hideads separator=''}
+			<span class="help-block">Whether the role should see the adsense code or not.</span>
+		</div>
+	</div>
+	
 
 {if $role.ID != ''}
 	<div class="control-group">
 		<label class="control-label" for="role">Is Default Role</label>
 		<div class="controls">
-			{html_radios id="role" name='isdefault' values=$yesno_ids output=$yesno_names selected=$role.isdefault separator='<br />'}
+			{html_radios id="role" name='isdefault' values=$yesno_ids output=$yesno_names selected=$role.isdefault separator=''}
 			<span class="help-block">Make this the default role for new users</span>
 		</div>
 	</div>

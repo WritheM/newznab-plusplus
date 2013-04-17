@@ -1,3 +1,27 @@
+--- www/admin/role-edit.php	Mon Apr 15 22:44:34 2013
++++ www/admin/role-edit.php	Wed Apr 17 16:10:22 2013
+@@ -31,18 +31,19 @@
+ 				$role["defaultinvites"] = '';
+ 				$role["canpreview"] = 0;
+ 				$role["canpre"] = 0;
++				$role["hideads"] = 0;
+ 				$page->smarty->assign('role', $role);	
+ 
+ 			break;
+     case 'submit':
+ 	    	if ($_POST["id"] == "")
+ 	    	{
+-					$ret = $users->addRole($_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['canpreview'], $_POST['canpre']);
++					$ret = $users->addRole($_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['canpreview'], $_POST['canpre'], $_POST['hideads']);
+ 					header("Location:".WWW_TOP."/role-list.php");
+ 	    	}
+ 	    	else
+ 	    	{
+-					$ret = $users->updateRole($_POST['id'], $_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['isdefault'], $_POST['canpreview'], $_POST['canpre']);
++					$ret = $users->updateRole($_POST['id'], $_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['isdefault'], $_POST['canpreview'], $_POST['canpre'], $_POST['hideads']);
+ 					header("Location:".WWW_TOP."/role-list.php");
+ 
+ 					$_POST['exccat'] = (!isset($_POST['exccat']) || !is_array($_POST['exccat'])) ? array() : $_POST['exccat'];
 --- www/lib/framework/basepage.php	Mon Apr 15 22:44:34 2013
 +++ www/lib/framework/basepage.php	Tue Apr 16 14:36:50 2013
 @@ -53,6 +53,10 @@
@@ -31,7 +55,7 @@
  			$this->smarty->assign('loggedin',"false");	
  			$this->floodCheck(false, "");
 --- www/lib/users.php	Mon Apr 15 22:44:34 2013
-+++ www/lib/users.php	Mon Apr 15 12:54:50 2013
++++ www/lib/users.php	Wed Apr 17 16:51:32 2013
 @@ -286,7 +286,7 @@
  	public function getById($id)
  	{			
@@ -41,6 +65,31 @@
  		return $db->queryOneRow($sql);		
  	}	
  	
+@@ -810,20 +810,20 @@
+ 		return $db->queryOneRow("select * from userroles where isdefault = 1");
+ 	}
+ 	
+-	public function addRole($name, $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre)
++	public function addRole($name, $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre, $hideads)
+ 	{
+ 		$db = new DB();
+-		$sql = sprintf("insert into userroles (name, apirequests, downloadrequests, defaultinvites, canpreview, canpre) VALUES (%s, %d, %d, %d, %d, %d)", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre);
++		$sql = sprintf("insert into userroles (name, apirequests, downloadrequests, defaultinvites, canpreview, canpre, hideads) VALUES (%s, %d, %d, %d, %d, %d)", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre, $hideads);
+ 		return $db->queryInsert($sql);
+ 	}
+ 	
+-	public function updateRole($id, $name, $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre)
++	public function updateRole($id, $name, $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre, $hideads)
+ 	{
+ 		$db = new DB();
+ 		if ($isdefault == 1)
+ 			$db->query("update userroles set isdefault=0");
+ 			
+-		return $db->query(sprintf("update userroles set name=%s, apirequests=%d, downloadrequests=%d, defaultinvites=%d, isdefault=%d, canpreview=%d, canpre=%d WHERE ID=%d", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre, $id));
++		return $db->query(sprintf("update userroles set name=%s, apirequests=%d, downloadrequests=%d, defaultinvites=%d, isdefault=%d, canpreview=%d, canpre=%d, hideads=%d WHERE ID=%d", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre, $hideads, $id));
+ 	}
+ 	
+ 	public function deleteRole($id)
 --- www/pages/filelist.php	Mon Apr 15 22:46:34 2013
 +++ www/pages/filelist.php	Mon Apr 15 17:55:50 2013
 @@ -34,7 +34,17 @@

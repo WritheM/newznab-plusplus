@@ -11,6 +11,7 @@
 		<th>invites</th>
 		<th>can preview</th>
 		<th>can pre</th>
+		<th>hide ads</th>
 		<th>default roles</th>
 		<th>options</th>
 	</tr>
@@ -24,6 +25,7 @@
 		<td>{$role.defaultinvites}</td>
 		<td>{if $role.canpreview == 1}Yes{else}No{/if}</td>
 		<td>{if $role.canpre == 1}Yes{else}No{/if}</td>
+		<td>{if $role.hideads == 1}Yes{else}No{/if}</td>
 		<td>{if $role.isdefault=="1"}Yes{else}No{/if}</td>
 		<td><div class="btn-group">
 			<a class="btn btn-mini btn-warning" href="{$smarty.const.WWW_TOP}/role-edit.php?id={$role.ID}">Edit</a>
