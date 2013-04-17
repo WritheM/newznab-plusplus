@@ -125,6 +125,19 @@ span.warning { color: red; }
 .rarfilelist {cursor:pointer;}
 
 /*
+Javascript referenced styles
+*/
+/*! Newznab tooltip style */
+.ui-tooltip-newznab .ui-tooltip-titlebar, .ui-tooltip-newznab .ui-tooltip-content{ /* ref:color.css */ }
+.ui-tooltip-newznab .ui-tooltip-content{ /* ref:color.css */ }
+.ui-tooltip-newznab .ui-tooltip-titlebar{ font-size:1.2em; }
+.ui-tooltip-newznab .ui-state-default .ui-tooltip-icon{ background-position: -42px 0; }
+
+table.ui-tooltip-newznab th {vertical-align:top;text-align:right;}
+ul.ui-tooltip-newznab li {text-align:left;}
+.ui-tooltip ul {padding:0; margin:0;line-height: 160%;}
+.ui-tooltip li {list-style-type:none;}
+/*
 movie, console and music modals with backdrop images.
 */
 #movieinfo { background-position: center center; background-repeat: no-repeat; position: absolute; z-index: 2;}

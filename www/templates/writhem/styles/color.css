@@ -27,12 +27,17 @@ mainly one-off styles used on individual pages
 */
 div.resextra { color: #555; }
 div.resextra a { color: #555; }
-
 div.movextra { color: #888; }
-
 div.error { background-color: #FED0D0; border-color: #BBB }
-
 .admin { background-color: #f2dede !important }
+
+/*
+Javascript referenced styles
+*/
+/*! Newznab tooltip style */
+.ui-tooltip-newznab .ui-tooltip-titlebar, .ui-tooltip-newznab .ui-tooltip-content{ border-color: #363a3d; color: #cb0808; }
+.ui-tooltip-newznab .ui-tooltip-content{ background-color: #cfcfcf; }
+.ui-tooltip-newznab .ui-tooltip-titlebar{ background-color: #363a3d; color:white; }
 
 /*
 movie, console and music modals with backdrop images.
