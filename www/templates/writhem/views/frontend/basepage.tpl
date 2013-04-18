@@ -49,7 +49,7 @@
 		var SERVERROOT = "{$serverroot}";
 		var UID = "{if $loggedin=="true"}{$userdata.ID}{else}{/if}";
 		var RSSTOKEN = "{if $loggedin=="true"}{$userdata.rsstoken}{else}{/if}";
-    var CARTNAME = "{$themevars.cart_name_plural}";
+		var CARTNAME = "{$themevars.cart_name_plural}";
 	/* ]]> */		
 	</script>
 	{$page->head}
@@ -71,7 +71,7 @@
 				{/if}&nbsp;
 				{$userdata.username}</a> 
 				<a class="btn dropdown-toggle" data-toggle="dropdown" href="#"><span class="caret"></span></a>
-				<ul class="dropdown-menu">
+				<ul class="dropdown-menu pull-right">
 					<li><a href="{$smarty.const.WWW_TOP}/profileedit"><i class="icon-edit"></i> Edit</a></li>
 					<li><a href="{$smarty.const.WWW_TOP}/logout"><i class="icon-off"></i> Logoff</a></li>
 				</ul>

@@ -111,13 +111,13 @@
             </button>
             {/if}
             {if $isadmin}
-            <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit">
+            <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_edit">
               <i class="icon-edit icon-white"></i>
             </button>
-            <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_delete">
+            <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_delete">
               <i class="icon-trash icon-white"></i>
             </button>
-            <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_rebuild">
+            <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_rebuild">
               <i class="icon-repeat icon-white"></i>
             </button>
             {/if}
@@ -226,9 +226,9 @@
           <button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>
           {/if}
           {if $isadmin}
-            <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
-            <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_delete"><i class="icon-trash icon-white"></i></button>
-            <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_rebuild"><i class="icon-repeat icon-white"></i></button>
+            <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
+            <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_delete"><i class="icon-trash icon-white"></i></button>
+            <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_rebuild"><i class="icon-repeat icon-white"></i></button>
           {/if}
         </div>
       </div>

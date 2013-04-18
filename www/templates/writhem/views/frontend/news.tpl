@@ -46,7 +46,7 @@
       <td style="text-align:right">
         <div class="btn-group"style="float:right;margin-top:5px;">
           {if $userdata.rolename == "Admin"}
-          <a id="newpost_btn" class="btn btn-mini btn-danger"  data-toggle="buttons-checkbox" onclick="jQuery('#newpost').toggle();">Add New</a>
+          <a id="newpost_btn" class="btn btn-mini btn-inverse"  data-toggle="buttons-checkbox" onclick="jQuery('#newpost').toggle();">Add New</a>
           {/if}				
           <a class="btn btn-mini" href="#top">Top</a>
         </div>
@@ -70,7 +70,7 @@
         <textarea class="span7" maxlength="5000" id="addMessage" name="addMessage" rows="6" ></textarea>
       </div>
 
-      <input class="btn btn-danger" class="forumpostsubmit" type="submit" value="Add New Post"/>
+      <input class="btn btn-inverse" class="forumpostsubmit" type="submit" value="Add New Post"/>
     </form>
   </div>
   {/if}

@@ -60,15 +60,15 @@
 
     {$user.rolename}
     </td></tr>
-	{if $userdata.role==2}<tr class="error"><th title="Admin Notes">Notes:</th><td>{$user.notes|escape:htmlall}{if $user.notes|count_characters > 0}<br/>{/if}<a class="btn btn-danger btn-mini" href="{$smarty.const.WWW_TOP}/admin/user-edit.php?id={$user.ID}#notes">Add/Edit</a></td></tr>{/if}
+	{if $userdata.role==2}<tr class="error"><th title="Admin Notes">Notes:</th><td>{$user.notes|escape:htmlall}{if $user.notes|count_characters > 0}<br/>{/if}<a class="btn btn-inverse btn-mini" href="{$smarty.const.WWW_TOP}/admin/user-edit.php?id={$user.ID}#notes">Add/Edit</a></td></tr>{/if}
 	{if $user.ID==$userdata.ID || $userdata.role==2}<tr class="info"><th title="Not public">Site Api/Rss Key:</th><td><a href="{$smarty.const.WWW_TOP}/rss?t=0&amp;dl=1&amp;i={$user.ID}&amp;r={$user.rsstoken}">{$user.rsstoken}</a></td></tr>{/if}
 	{if $user.ID==$userdata.ID || $userdata.role==2}
-	<tr class="info"><th>API Hits Today:</th><td><span id="uatd">{$apihits.num}</span> {if $userdata.role==2 && $apihits.num > 0}<a class="btn btn-danger btn-mini" onclick="resetapireq({$user.ID}, 'api'); document.getElementById('uatd').innerHTML='0'; return false;" href="#">Reset</a>{/if}</td></tr>
+	<tr class="info"><th>API Hits Today:</th><td><span id="uatd">{$apihits.num}</span> {if $userdata.role==2 && $apihits.num > 0}<a class="btn btn-inverse btn-mini" onclick="resetapireq({$user.ID}, 'api'); document.getElementById('uatd').innerHTML='0'; return false;" href="#">Reset</a>{/if}</td></tr>
 
 
 
 
-	<tr><th>Grabs Today:</th><td><span id="ugrtd">{$grabstoday.num}</span> {if $grabstoday.num >= $user.downloadrequests}&nbsp;&nbsp;<small>(Next DL in {($grabstoday.nextdl/3600)|intval}h {($grabstoday.nextdl/60) % 60}m)</small>{/if}{if $userdata.role==2 && $grabstoday.num > 0}<a  class="btn btn-danger btn-mini" onclick="resetapireq({$user.ID}, 'grabs'); document.getElementById('ugrtd').innerHTML='0'; return false;" href="#">Reset</a>{/if}</td></tr>
+	<tr><th>Grabs Today:</th><td><span id="ugrtd">{$grabstoday.num}</span> {if $grabstoday.num >= $user.downloadrequests}&nbsp;&nbsp;<small>(Next DL in {($grabstoday.nextdl/3600)|intval}h {($grabstoday.nextdl/60) % 60}m)</small>{/if}{if $userdata.role==2 && $grabstoday.num > 0}<a  class="btn btn-inverse btn-mini" onclick="resetapireq({$user.ID}, 'grabs'); document.getElementById('ugrtd').innerHTML='0'; return false;" href="#">Reset</a>{/if}</td></tr>
 
 
 

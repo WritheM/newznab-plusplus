@@ -49,7 +49,7 @@ page structure
 #logo h1, #logo p { display:none; margin: 0px; line-height: normal; text-transform: lowercase; font-weight: normal;}
 
 #statusbar { width:940px; margin: 0 auto; text-align:right; padding:5px 10px 0 0;}
-#statusbar a { /* ref:color.css */ text-decoration: none; }
+#statusbar a { text-decoration: none; }
 
 #content { float: right; width: 750px;}
 #content h1 { font-size: 2.3em;}
@@ -60,13 +60,15 @@ page structure
 #sidebar li { margin-bottom: 30px; padding: 0 0 0 0;}
 #sidebar li ul { list-style-type: none;  list-style-position:inside; margin: 0px 10px; padding: 0; margin-left: 1em;}
 #sidebar li li { margin: 0.2em;	padding-left: .2em;}
-#sidebar li li a { /* ref:color.css */ padding: 0 0 0 20px; font-weight: normal; background-image: url('../images/bullet.jpg'); background-repeat: no-repeat; background-position: 0.7em 0.6em; margin: 0.2em; }
+#sidebar li li a { /* ref:color.css */ padding: 0 0 0 5px; font-weight: normal; margin: 0.2em; }
 #sidebar li li:hover { cursor:pointer; }
-#sidebar li li a:hover { /* ref:color.css */ background-image: url('../images/bullet_hov.jpg'); -moz-transition: background .3s linear; -webkit-transition: background .3s linear; -ms-transition: background .3s linear; -o-transition: background .3s linear; transition: background .3s linear; }
+#sidebar li li a:hover { /* ref:color.css */ -moz-transition: background .3s linear; -webkit-transition: background .3s linear; -ms-transition: background .3s linear; -o-transition: background .3s linear; transition: background .3s linear; }
+#sidebar li li a:hover div.icon_bullet { /* ref:color.css */ background-image: none; position:relative;top:5px;width:8px;height:8px; margin-right:10px; -moz-transition: background .3s linear; -webkit-transition: background .3s linear; -ms-transition: background .3s linear; -o-transition: background .3s linear; transition: background .3s linear; }
 #sidebar p { margin: 0; padding: 0px 14px;}
 #sidebar h2 { /* ref:color.css */ height: 30px; margin: 0 0 5px 0px; padding: 6px 0 2px 14px; font-size: 18px; font-weight: normal; }
 #sidebar p { line-height: 200%;}
 #sidebar a { text-align: left; text-decoration: none; font-weight: bold;}
+div.icon_bullet	{ background-image:url('../images/bullet.jpg'); position:relative; top:5px; }
 
 .footer { width: 100%; height: 100px; margin: 0 auto; border-top: 0px solid; }
 .footer p { margin: 0; padding: 20px 0px 0px 0px; text-align: center; line-height: normal; font-size: 0.9em; }
@@ -175,7 +177,6 @@ div.icon_sab			{ background-image:url('../images/icons/sabup.png'); }
 div.icon_sab_clicked	{ background-image:url('../images/icons/sabdown.png'); }
 div.icon_tvrage			{ background-image:url('../images/icons/tvrage.png'); }
 div.icon_check			{ background-image:url('../images/icons/check.png'); }
-
 
 /*
     ColorBox Core Style

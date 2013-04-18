@@ -425,8 +425,8 @@
 		<table class="table table-bordered" id="detailstable" >			
 			<tr><th>Actions:</th>
 				<td><div class="btn-group">
-					<a class="btn btn-mini btn-danger" href="{$smarty.const.WWW_TOP}/admin/release-edit.php?id={$release.ID}&amp;from={$smarty.server.REQUEST_URI}" title="Edit Release"><i class="icon-edit icon-white"></i> Edit</a> 
-					<a class="btn btn-mini btn-danger" href="{$smarty.const.WWW_TOP}/admin/release-delete.php?id={$release.ID}&amp;from={$smarty.server.HTTP_REFERER}" title="Delete Release"><i class="icon-trash icon-white"></i> Delete</a>
+					<a class="btn btn-mini btn-inverse" href="{$smarty.const.WWW_TOP}/admin/release-edit.php?id={$release.ID}&amp;from={$smarty.server.REQUEST_URI}" title="Edit Release"><i class="icon-edit icon-white"></i> Edit</a> 
+					<a class="btn btn-mini btn-inverse" href="{$smarty.const.WWW_TOP}/admin/release-delete.php?id={$release.ID}&amp;from={$smarty.server.HTTP_REFERER}" title="Delete Release"><i class="icon-trash icon-white"></i> Delete</a>
 				</div></td>
 			</tr>
 			<tr><th>Release Info:</th>
@@ -439,7 +439,7 @@
 			</tr>
 			<tr><th width="110px">Nuke This Release:</th>
 				<td>
-                    <a class="btn btn-mini btn-danger" data-toggle="button" id="lnkNukeIt" onclick="jQuery('#divNukeIt').toggle();"><i class="icon-warning-sign icon-white"></i> Nuke It!</a><br />
+                    <a class="btn btn-mini btn-inverse" data-toggle="button" id="lnkNukeIt" onclick="jQuery('#divNukeIt').toggle();"><i class="icon-warning-sign icon-white"></i> Nuke It!</a><br />
                     <div style="display:none;" id="divNukeIt">
                         <form id="frmNukeIt" method="GET">
                             <input type="hidden" id="txtGUID" value="{$release.guid}"/>
@@ -459,7 +459,7 @@
                                 <span class="add-on"><label for="txtScope">Scope</label></span>
                                 <input class="span3" type="text" id="txtScope" value="LOCAL"/>
                             </div>
-                            <button class="btn btn-danger" type="submit">Detonate!</button>
+                            <button class="btn btn-inverse" type="submit">Detonate!</button>
                         </form>
                     </div>
                     <span title="We successfully did a local Nuke" class="nukeitsuccess" id="divNukeItSuccess" style="display:none;">Aquiring Target...</span>

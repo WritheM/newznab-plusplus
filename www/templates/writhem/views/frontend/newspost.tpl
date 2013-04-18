@@ -34,7 +34,7 @@
 				on <span title="{$result.createddate}">{$result.createddate|date_format}</span> <div class="hint">({$result.createddate|timeago})</div>
 				{if $userdata.role}
 				<div>
-					<a class="btn btn-mini btn-danger confirm_action" href="{$smarty.const.WWW_TOP}/admin/forum-delete.php?id={$result.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}" title="Delete Post">Delete</a>
+					<a class="btn btn-mini btn-inverse confirm_action" href="{$smarty.const.WWW_TOP}/admin/forum-delete.php?id={$result.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}" title="Delete Post">Delete</a>
 				</div>
 				{/if}
 				

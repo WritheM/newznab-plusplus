@@ -5,7 +5,7 @@
   <h1>
   {foreach $rage as $r}
     {if $isadmin}
-      <a class="btn btn-danger btn-small" title="Edit rage data" href="{$smarty.const.WWW_TOP}/admin/rage-edit.php?id={$r.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}">{$r.releasetitle} </a>
+      <a class="btn btn-inverse btn-small" title="Edit rage data" href="{$smarty.const.WWW_TOP}/admin/rage-edit.php?id={$r.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}">{$r.releasetitle} </a>
     {else}
       {$r.releasetitle} 
     {/if}
@@ -40,7 +40,7 @@
 
   <form id="nzb_multi_operations_form" action="get">
     <div class="btn-group">
-      {if $rage|@count == 1 && $isadmin}<a class="btn btn-mini btn-danger" href="{$smarty.const.WWW_TOP}/admin/rage-edit.php?id={$r.ID}&amp;action=update&amp;from={$smarty.server.REQUEST_URI|escape:"url"}">Update From Tv Rage</a> | {/if}
+      {if $rage|@count == 1 && $isadmin}<a class="btn btn-mini btn-inverse" href="{$smarty.const.WWW_TOP}/admin/rage-edit.php?id={$r.ID}&amp;action=update&amp;from={$smarty.server.REQUEST_URI|escape:"url"}">Update From Tv Rage</a> | {/if}
       <a class="btn btn-mini" target="_blank" href="{$site->dereferrer_link}http://www.tvrage.com/shows/id-{$rage[0].rageID}" title="View in TvRage">View in Tv Rage</a> | 
       <a class="btn btn-mini" href="{$smarty.const.WWW_TOP}/rss?rage={$rage[0].rageID}{if $category != ''}&amp;t={$category}{/if}&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}">Series RSS <i class="fa-icon-rss"></i></a>
     </div>
@@ -51,8 +51,8 @@
         <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="{$themevars.cart_icon}"></i> {$themevars.cart_name_add}</button>
         {if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
         {if $isadmin}
-          <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
-          <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_delete"><i class="icon-trash icon-white"></i></button>
+          <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
+          <button type="button" class="btn btn-mini btn-inverse nzb_multi_operations_delete"><i class="icon-trash icon-white"></i></button>
         {/if}
       </div>
     </div>
@@ -102,8 +102,8 @@
                     {if $result.tvairdate != ""}<span class="btn btn-mini" title="{$result.tvtitle} Aired on {$result.tvairdate|date_format}">Aired {if $result.tvairdate|strtotime > $smarty.now}in future{else}{$result.tvairdate|daysago}{/if}</span>{/if}
                     {if $result.reID > 0}<span class="mediainfo btn btn-mini" title="{$result.guid}">Media</span>{/if}
                   {if $isadmin}
-                    <a class="btn btn-mini btn-danger" href="{$smarty.const.WWW_TOP}/admin/release-edit.php?id={$result.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}" title="Edit Release"><i class="icon-edit icon-white"></i></a> 
-                    <a class="btn btn-mini btn-danger confirm_action" href="{$smarty.const.WWW_TOP}/admin/release-delete.php?id={$result.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}" title="Delete Release"><i class="icon-trash icon-white"></i></a>
+                    <a class="btn btn-mini btn-inverse" href="{$smarty.const.WWW_TOP}/admin/release-edit.php?id={$result.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}" title="Edit Release"><i class="icon-edit icon-white"></i></a> 
+                    <a class="btn btn-mini btn-inverse confirm_action" href="{$smarty.const.WWW_TOP}/admin/release-delete.php?id={$result.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}" title="Delete Release"><i class="icon-trash icon-white"></i></a>
                   {/if}			
                   </div>
                 </div>

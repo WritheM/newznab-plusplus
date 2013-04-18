@@ -47,8 +47,8 @@
 					<input type="button" class="nzb_multi_operations_cart btn btn-mini" value="{$themevars.cart_name_add}" />
 					{if $sabintegrated}<input type="button" class="nzb_multi_operations_sab btn btn-mini" value="Send to SAB" />{/if}
           {if $isadmin}
-              <input type="button" class="nzb_multi_operations_edit btn btn-mini btn-danger" value="Edit" />
-              <input type="button" class="nzb_multi_operations_delete btn btn-mini btn-danger" value="Delete" />
+              <input type="button" class="nzb_multi_operations_edit btn btn-mini btn-inverse" value="Edit" />
+              <input type="button" class="nzb_multi_operations_delete btn btn-mini btn-inverse" value="Delete" />
           {/if}	
 				</div>
 
@@ -216,7 +216,7 @@
 					Admin: 	
 					<div class="btn-group">	
 						<input type="button" class="nzb_multi_operations_edit btn btn-small btn-warning" value="Edit" />
-						<input type="button" class="nzb_multi_operations_delete btn btn-small btn-danger" value="Delete" />
+						<input type="button" class="nzb_multi_operations_delete btn btn-small btn-inverse" value="Delete" />
 					</div>
 				</div>
 				{/if}	

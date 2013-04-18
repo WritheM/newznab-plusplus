@@ -62,7 +62,7 @@
     <div class="input-prepend input-append control-group warning">
         <span class="add-on">$</span>
         <input class="span1" type="text" name="amount" value="{$donate_avg|number_format:2:".":"," + 1}">
-        <button class="btn btn-danger" type="submit">Donate Now (test)</button>
+        <button class="btn btn-inverse" type="submit">Donate Now (test)</button>
     </div>
 </form>
 {/if}
