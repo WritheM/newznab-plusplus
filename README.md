@@ -1,7 +1,8 @@
 newznab-plusplus
 ================
 
-This is a theme in development, with intended purpose of becoming the new default gold standard that all themes will eventually live up to.
+This is a theme in development, with intended purpose of becoming the new default gold standard that all themes will eventually live up to.  
+This theme only changes the front-end theme, which means if you have a custom admin section you can copy most of that over from your existing theme into the writhem nn++ theme. The one exception is the user-roles template... We've given you the ability to hide advertisements or show them based on role. 
 
 Check the issues tab at top for a list of things to come, or request features to be developed into the theme.
 
@@ -28,6 +29,38 @@ If you change your icon for cart, you may want to change the css for the js driv
     div.icon_cart_clicked	{ background-image:url('../images/icons/cartdown.png'); }
 
 Don't forget to change your menu names in the admin panel as well. 
+
+To utilize the Realtime Status functionality, make sure you define your logs in your theme.php. If you are not currently outputing the php update scripts to a log file you should edit your update scripts. You can start a new log file by following this little slice of code sample
+
+    set -e
+
+    export NEWZNAB_PATH="/usr/local/www/newznab/misc/update_scripts"
+    export NEWZNAB_SLEEP_TIME="600" # in seconds
+    LASTOPTIMIZE=`date +%s`
+    LOGFILE="/var/www/newznab/misc/update_scripts/logs/updating.log"
+
+    while :
+
+     do
+    CURRTIME=`date +%s`
+    cd ${NEWZNAB_PATH}
+    /usr/bin/php5 ${NEWZNAB_PATH}/update_binaries.php > $LOGFILE
+    /usr/bin/php5 ${NEWZNAB_PATH}/update_releases.php >> $LOGFILE
+
+    DIFF=$(($CURRTIME-$LASTOPTIMIZE))
+    if [ "$DIFF" -gt 43200 ] || [ "$DIFF" -lt 1 ]
+    then
+        LASTOPTIMIZE=`date +%s`
+        /usr/bin/php5 ${NEWZNAB_PATH}/optimise_db.php >> $LOGFILE
+        /usr/bin/php5 ${NEWZNAB_PATH}/update_tvschedule.php >> $LOGFILE
+        /usr/bin/php5 ${NEWZNAB_PATH}/update_theaters.php >> $LOGFILE
+    fi
+
+    rm -f $LOGFILE
+    echo "waiting ${NEWZNAB_SLEEP_TIME} seconds..."
+    sleep ${NEWZNAB_SLEEP_TIME}
+
+    done
 
 
 Screenshots
