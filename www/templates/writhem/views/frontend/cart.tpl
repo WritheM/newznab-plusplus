@@ -1,10 +1,10 @@
 
 
 
-<h1>My Bookmarks</h1>
+<h1>My {$themevars.cart_name_plural}</h1>
 
 <p>
-Your bookmarks can be downloaded as an <a href="{$smarty.const.WWW_TOP}/rss?t=-2&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}&amp;del=1">Rss Feed</a>.
+Your {$themevars.cart_name_plural} can be downloaded as an <a href="{$smarty.const.WWW_TOP}/rss?t=-2&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}&amp;del=1">Rss Feed</a>.
 </p>
 
 
@@ -60,5 +60,5 @@ Your bookmarks can be downloaded as an <a href="{$smarty.const.WWW_TOP}/rss?t=-2
 
 
 
-<h2>No NZBs have been bookmarked</h2>
+<h2>No NZBs have been added to your {$themevars.cart_name_plural}</h2>
 {/if}

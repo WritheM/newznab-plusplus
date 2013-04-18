@@ -76,12 +76,12 @@ jQuery(function($){
 	$('.icon_cart').click(function(e){
 		if ($(this).hasClass('icon_cart_clicked')) return false;
 		var guid = $(this).parent().parent().attr('id').substring(4);
-		$.post( SERVERROOT + "bookmarks?add=" + guid, function(resp){
-			$(e.target).addClass('icon_cart_clicked').attr('title','Added to Bookmarks');
+		$.post( SERVERROOT + "cart?add=" + guid, function(resp){
+			$(e.target).addClass('icon_cart_clicked').attr('title','Added to '+CARTNAME);
 	        
 	        $.pnotify({
 		        title: 'ADDED!',
-		        text: 'Its now in your Bookmarks! ^_^',
+		        text: 'Its now in your '+CARTNAME+'! ^_^',
 		        type: 'success',
 		        icon: 'fa-icon-info-sign'
 		    });
@@ -113,11 +113,11 @@ jQuery(function($){
 		if ($(this).hasClass('icon_cart_clicked')) return false;
 		var guid = $(this).parent().attr('id');
 		$.post( SERVERROOT + "cart?add=" + guid, function(resp){
-			$(e.target).addClass('icon_cart_clicked').attr('title','Added to Cart');
+			$(e.target).addClass('icon_cart_clicked').attr('title','Added to your '+CARTNAME);
 	        
 	        $.pnotify({
 		        title: 'ADDED!',
-		        text: 'Its now in your Cart! ^_^',
+		        text: 'Its now in your '+CARTNAME+'! ^_^',
 		        type: 'success',
 		        icon: 'fa-icon-info-sign'
 		    });
@@ -204,18 +204,18 @@ jQuery(function($){
 	    	var guid = $(row).val();
 	    	var $cartIcon = $(row).parent().parent().children('td.icons').children('.icon_cart');
 			if (guid && !$cartIcon.hasClass('icon_cart_clicked')){
-				$cartIcon.addClass('icon_cart_clicked').attr('title','Added to Bookmarks');	// consider doing this only upon success
+				$cartIcon.addClass('icon_cart_clicked').attr('title','Added to '+CARTNAME);	// consider doing this only upon success
 				guids.push(guid);
 				$.pnotify({
 					title: 'ADDED!',
-					text: 'Its now in your Bookmarks! ^_^',
+					text: 'Its now in your '+CARTNAME+'! ^_^',
 					type: 'success',
 					icon: 'fa-icon-info-sign'
 				});
 			}
 			$(this).attr('checked', false);
 		});
-		$.post( SERVERROOT + "bookmarks?add", { 'add': guids });
+		$.post( SERVERROOT + "cart?add", { 'add': guids });
 	});
 	$('button.nzb_multi_operations_sab').click(function(){
 	    $("table.data INPUT[type='checkbox']:checked").each( function(i, row) {
@@ -286,8 +286,8 @@ jQuery(function($){
 	    });
 	    if (ids)
 	    {
-			if (confirm('Are you sure you want to delete the selected releases from your bookmarks?')) {
-				$.post( SERVERROOT + "bookmarks?delete", { 'delete': ids }, function(resp){
+			if (confirm('Are you sure you want to delete the selected releases from your '+CARTNAME+'?')) {
+				$.post( SERVERROOT + "cart?delete", { 'delete': ids }, function(resp){
 					window.location = window.location;
 				});
 			}

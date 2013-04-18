@@ -29,7 +29,7 @@
         <small>With selected:</small>
         <div class="btn-group">
         <button type="button" class="btn btn-mini nzb_multi_operations_download"><i class="icon-download"></i> Download NZBs</button>
-        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="icon-bookmark"></i> Bookmark</button>
+        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="{$themevars.cart_icon}"></i> {$themevars.cart_name_add}</button>
         {if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
         {if $isadmin}
           <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
@@ -167,7 +167,7 @@
 				<a title="View file list" href="{$smarty.const.WWW_TOP}/filelist/{$result.guid}">{$result.totalpart}</a>
 				{if $result.rarinnerfilecount > 0}
 					<div class="rarfilelist">
-						<i class="icon-file" style="opacity:0.2;"></i><img src="{$smarty.const.WWW_TOP}/views/images/icons/magnifier.png" alt="{$result.guid}" class="tooltip" />				
+						<i class="icon-file" style="opacity:0.2;"></i><img alt="{$result.guid}" class="tooltip" />
 					</div>
 				{/if}
 			</td>
@@ -181,7 +181,7 @@
       </td>
 			<td class="icons">
 				<div class="icon icon_nzb"><a title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$result.guid}/{$result.searchname|escape:"url"}">&nbsp;</a></div>
-				<div class="icon icon_cart" title="Bookmark this release"></div>
+				<div class="icon icon_cart" title="{$themevars.cart_name_add}"></div>
 				{if $sabintegrated}<div class="icon icon_sab" title="Send to my Sabnzbd"></div>{/if}
 			</td>
 		</tr>
@@ -195,7 +195,7 @@
       <td style="text-align:right"><div class="nzb_multi_operations">
         <small>With selected:</small><div class="btn-group">
         <button type="button" class="btn btn-mini nzb_multi_operations_download"><i class="icon-download"></i> Download NZBs</button>
-        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="icon-bookmark"></i> Bookmark</button>
+        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="{$themevars.cart_icon}"></i> {$themevars.cart_name_add}</button>
         {if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
 
         {if $isadmin}

@@ -56,21 +56,21 @@
 	</li><br/>		
 
 	<li>
-		<b>Cart</b> <code><a href="{$smarty.const.WWW_TOP}/rss?t=-2">rss?t=-2&amp;del=1</a></code>
+		<b>{$themevars.cart_name_plural}</b> <code><a href="{$smarty.const.WWW_TOP}/rss?t=-2">rss?t=-2&amp;del=1</a></code>
 		<br/>
-		Returns the items in a users cart in the form of an rss feed. The optional parameter <code>&amp;del=1</code> will remove the items from the cart after the feed is requested.
+		Returns the items in a users {$themevars.cart_name_plural} in the form of an rss feed. The optional parameter <code>&amp;del=1</code> will remove the items from the {$themevars.cart_name_plural} after the feed is requested.
 	</li><br/>					
 
 	<li>
-		<b>CartAdd</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartadd&amp;id={$userdata.rsstoken}">?t=cartadd&amp;id={$userdata.rsstoken}</a></code>
+		<b>{$themevars.cart_name_add}Add</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartadd&amp;id={$userdata.rsstoken}">?t=cartadd&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
-		Adds an nzb to a users cart.
+		Adds an nzb to a users {$themevars.cart_name_plural}.
 	</li><br/>					
 
 	<li>
-		<b>CartDelete</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartdel&amp;id={$userdata.rsstoken}">?t=cartdel&amp;id={$userdata.rsstoken}</a></code>
+		<b>{$themevars.cart_name_add}Delete</b> <code><a href="{$smarty.const.WWW_TOP}/api?t=cartdel&amp;id={$userdata.rsstoken}">?t=cartdel&amp;id={$userdata.rsstoken}</a></code>
 		<br/>
-		Remove an nzb from a users cart.
+		Remove an nzb from a users {$themevars.cart_name_plural}.
 	</li><br/>					
 </ul>
 

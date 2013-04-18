@@ -49,6 +49,7 @@
 		var SERVERROOT = "{$serverroot}";
 		var UID = "{if $loggedin=="true"}{$userdata.ID}{else}{/if}";
 		var RSSTOKEN = "{if $loggedin=="true"}{$userdata.rsstoken}{else}{/if}";
+    var CARTNAME = "{$themevars.cart_name_plural}";
 	/* ]]> */		
 	</script>
 	{$page->head}

@@ -38,23 +38,10 @@
 {/foreach}
 <br />
 
-<!-- ### -- BUTTONS -->
-<!--<div id="guid{$release.guid}">-->
-	<!--<a class="btn btn-mini" title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$release.guid}/{$release.searchname|escape:"url"}"><i class="icon-download"></i> Download NZB</a>
-	<button class="btn btn-mini icon_cart"><i class="icon-shopping-cart"></i>Add to Bookmarks</button>
-	{if $sabintegrated}<button class="btn btn-mini icon_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}-->
-			<!--<tr id="guid{$release.guid}"><td>
-				<div class="icon icon_nzb"><a title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$release.guid}/{$release.searchname|escape:"url"}">&nbsp;</a></div>
-				<div class="icon icon_cart" title="Add to Bookmarks"><a title="Bookmark this Release" href="{$smarty.const.WWW_TOP}/cart?add={$release.guid}">&nbsp;</a></div>
-				{if $sabintegrated}<div class="icon icon_sab" title="Send to my Sabnzbd"></div>{/if}
-			</td></tr>
-
-</div>
-<br />-->
   <table>
   <tr id="guid{$release.guid}"><th>Download:</th><td>
     <div class="icon icon_nzb"><a title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$release.guid}/{$release.searchname|escape:"url"}">&nbsp;</a></div>
-    <div class="icon icon_cart" title="Add to Bookmarks"></div>
+    <div class="icon icon_cart" title="{$themevars.cart_name_add}"></div>
     {if $sabintegrated}<div class="icon icon_sab" title="Send to my Sabnzbd"></div>{/if}
   </td>
   </table>
@@ -217,7 +204,7 @@
 			<tr><th>Added:</th><td title="{$release.adddate}">{$release.adddate|date_format:"%b %e, %Y %T"} ({$release.adddate|daysago})</td></tr>
 			<tr id="guid{$release.guid}"><th>Download:</th><td>
 				<div class="icon icon_nzb"><a title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$release.guid}/{$release.searchname|escape:"url"}">&nbsp;</a></div>
-				<div class="icon icon_cart" title="Add to Bookmarks"></div>
+				<div class="icon icon_cart" title="{$themevars.cart_name_add}"></div>
 				{if $sabintegrated}<div class="icon icon_sab" title="Send to my Sabnzbd"></div>{/if}
 			</td></tr>
 			<tr>

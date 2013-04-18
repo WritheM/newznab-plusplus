@@ -48,7 +48,7 @@
       <small>With selected:</small>
       <div class="btn-group">
         <button type="button" class="btn btn-mini nzb_multi_operations_download"><i class="icon-download"></i> Download NZBs</button>
-        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="icon-bookmark"></i> Bookmark</button>
+        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="{$themevars.cart_icon}"></i> {$themevars.cart_name_add}</button>
         {if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
         {if $isadmin}
           <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
@@ -77,7 +77,7 @@
       </ul>
       
       {foreach $season as $episodenum => $episodes name="epis"}
-      <table style="width:85%; border-top: 0px; {if !$smarty.foreach.epis.first}display:none;{/if}" class="tb_{$seasonnum}{$episodenum} data highlight icons table " id="browsetable">
+      <table style="width:90%; border-top: 0px; margin-left:-15px; background-color:white; {if !$smarty.foreach.epis.first}display:none;{/if}" class="tb_{$seasonnum}{$episodenum} data highlight icons table" id="browsetable">
         <tr>
           <td style="padding-top:15px;" colspan="10"><h2>Season {$seasonnum} Episode {$episodenum}</h2></td>
         </tr>
@@ -116,7 +116,7 @@
                 <a title="View file list" href="{$smarty.const.WWW_TOP}/filelist/{$result.guid}">{$result.totalpart}</a>
                 {if $result.rarinnerfilecount > 0}
                   <div class="rarfilelist">
-                    <img src="{$smarty.const.WWW_TOP}/views/images/icons/magnifier.png" alt="{$result.guid}" class="tooltip" />				
+                    <i class="icon-file" style="opacity:0.2;"></i><img alt="{$result.guid}" class="tooltip" />
                   </div>
                 {/if}							
               </td>
@@ -130,7 +130,7 @@
               </td>
               <td class="icons">
                 <div class="icon icon_nzb"><a title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$result.guid}/{$result.searchname|escape:"url"}">&nbsp;</a></div>
-                <div class="icon icon_cart" title="Add to Bookmarks"></div>
+                <div class="icon icon_cart" title="{$themevars.cart_name_add}"></div>
                 {if $sabintegrated}<div class="icon icon_sab" title="Send to my Sabnzbd"></div>{/if}
               </td>
             </tr>

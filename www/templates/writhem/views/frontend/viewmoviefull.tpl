@@ -39,30 +39,23 @@
 		</div>
 		
 		<form id="nzb_multi_operations_form" action="get">
-		<div class="well well-small">
 			<div class="nzb_multi_operations">
 				{if $section != ''}View: <a href="{$smarty.const.WWW_TOP}/{$section}?t={$category}">Covers</a> | <b>List</b><br />{/if}
 				With Selected:
-				<div class="btn-group">
-					<input type="button" class="nzb_multi_operations_download btn btn-small btn-success" value="Download NZBs" />
-					<input type="button" class="nzb_multi_operations_cart btn btn-small btn-info" value="Add to Cart" />
-					{if $sabintegrated}<input type="button" class="nzb_multi_operations_sab btn btn-small btn-primary" value="Send to SAB" />{/if}
+				<div class="btn-group pull-right">
+					<input type="button" class="nzb_multi_operations_download btn btn-mini" value="Download NZBs" />
+					<input type="button" class="nzb_multi_operations_cart btn btn-mini" value="{$themevars.cart_name_add}" />
+					{if $sabintegrated}<input type="button" class="nzb_multi_operations_sab btn btn-mini" value="Send to SAB" />{/if}
+          {if $isadmin}
+              <input type="button" class="nzb_multi_operations_edit btn btn-mini btn-danger" value="Edit" />
+              <input type="button" class="nzb_multi_operations_delete btn btn-mini btn-danger" value="Delete" />
+          {/if}	
 				</div>
 
-				{if $isadmin}
-				<div class="pull-right">
-					Admin: 	
-					<div class="btn-group">	
-						<input type="button" class="nzb_multi_operations_edit btn btn-small btn-warning" value="Edit" />
-						<input type="button" class="nzb_multi_operations_delete btn btn-small btn-danger" value="Delete" />
-					</div>
-				</div>
-				{/if}	
 			</div>
-		</div>
 		
 
-		<table style="width:100%;" class="data highlight icons table table-striped" id="browsetable">
+		<table style="width:100%;" class="data highlight icons table table-bordered table-striped" id="browsetable">
 			<tr>
 				<th>
 					<input id="chkSelectAll" type="checkbox" class="nzb_check_all" />
@@ -183,17 +176,17 @@
 				<td class="icons">
 					<div class="icon icon_nzb">
 						<a title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$mguid[$m@index]}/{$mname[$m@index]|escape:"url"}">
-							<img src="{$smarty.const.WWW_TOP}/templates/baffi/images/icons/nzbup.png"/>
+							<img src="{$smarty.const.WWW_TOP}/templates/writhem/images/icons/nzbup.png"/>
 						</a>
 					</div>
-					<div class="icon icon_cart" title="Add to Cart">
-						<img src="{$smarty.const.WWW_TOP}/templates/baffi/images/icons/cartup.png"/>
+					<div class="icon icon_cart" title="{$themevars.cart_name_add}">
+						<img src="{$smarty.const.WWW_TOP}/templates/writhem/images/icons/cartup.png"/>
 					</div>
 					{if $sabintegrated}
 						<div class="icon">
 							<div id="sab">
 								<div class="icon_sab" title="Send to my Sabnzbd">	
-									<img src="{$smarty.const.WWW_TOP}/templates/baffi/images/icons/sabup.png"/>
+									<img src="{$smarty.const.WWW_TOP}/templates/writhem/images/icons/sabup.png"/>
 								</div>
 							</div>
 						</div>
@@ -214,7 +207,7 @@
 				With Selected:
 				<div class="btn-group">
 					<input type="button" class="nzb_multi_operations_download btn btn-small btn-success" value="Download NZBs" />
-					<input type="button" class="nzb_multi_operations_cart btn btn-small btn-info" value="Add to Cart" />
+					<input type="button" class="nzb_multi_operations_cart btn btn-small btn-info" value="{$themevars.cart_name_add}" />
 					{if $sabintegrated}<input type="button" class="nzb_multi_operations_sab btn btn-small btn-primary" value="Send to SAB" />{/if}
 				</div>
 

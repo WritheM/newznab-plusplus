@@ -1,15 +1,32 @@
 newznab-plusplus
 ================
 
-This is currently a theme in development, with intended purpose of becoming the new default gold standard that all themes will eventually live up to.
+This is a theme in development, with intended purpose of becoming the new default gold standard that all themes will eventually live up to.
 
-RED Theme is now functional, check the issues tab at top for a list of things to come, or request features to be developed into the theme.
+**RED Theme is functional**, check the issues tab at top for a list of things to come, or request features to be developed into the theme.
 
 Copy the www folder over your current install, replacing files if prompted.
 
 There are changes required to the db located in `dbchanges.sql`
 
 Changes to the core newznab+ files are located in `newznab.patch`
+
+Configuration
+-------
+
+In the `www/templates/writhem/theme.php` file you can set multiple options. Including color, titles and file locations.
+
+Stylesheets are located in `www/templates/writhem/styles/`. All colors that could be changed are located in `color.css` and `bootstrap.css`. It might be easier to change the bootstrap colours by generating a new stylesheet with http://twitter.github.io/bootstrap/customize.html. The colours we have changed from default are: @linkColor
+
+If you change your icon for cart, you may want to change the css for the js driven images as well. Located on line 169 and 170. 
+
+    div.icon_cart			{ background-image:url('../images/icons/cartup.png'); }
+    div.icon_cart_clicked	{ background-image:url('../images/icons/cartdown.png'); }
+
+Don't forget to change your menu item in the admin panel as well. 
+
+There are references to the newznab lib path in each of the plugins in `www/lib/smarty/plugins/` as well. You may need to correct the full path that is defined in these until they are coded into the newznab core. This is a temporary step... bare with us.
+
 
 Screenshots
 -----------
@@ -18,7 +35,7 @@ Series season/episode cross browser. Switch between episodes and seasons easily 
 
 ![Series Cross Browser](http://i.imgur.com/Ciz1N1b.png)
 
-User Menu on left with realtime status below the catagory bar:
+User Menu on left with realtime status below the catagory bar. You'll also notice the customizable menu break between PreDB and My Movies below:
 
  ![Realtime Status](http://i.imgur.com/niadbCi.png)
 

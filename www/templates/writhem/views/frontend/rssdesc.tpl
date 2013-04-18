@@ -12,7 +12,7 @@
 		Add this string to your feed URL to allow NZB downloads without logging in: <code>&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}</code>
 	</li>
 	<li>
-		To remove the NZB from your cart after download add this string to your feed URL: <code>&amp;del=1</code> 
+		To remove the NZB from your {$themevars.cart_name_plural} after download add this string to your feed URL: <code>&amp;del=1</code> 
 	</li>
 	<li>
 		To change the default link to download an NZB: <code>&amp;dl=1</code>
@@ -41,7 +41,7 @@
 		<code><a href="{$smarty.const.WWW_TOP}/rss?t=0&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}">{$smarty.const.WWW_TOP}/rss?t=0&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}</a></code>
 	</li><br/>
 	<li>
-		<a href="{$smarty.const.WWW_TOP}/cart">My cart</a> : 
+		<a href="{$smarty.const.WWW_TOP}/cart">My {$themevars.cart_name_plural}</a> : 
 		<code><a href="{$smarty.const.WWW_TOP}/rss?t=-2&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}&amp;del=1">{$smarty.const.WWW_TOP}/rss?t=-2&amp;dl=1&amp;i={$userdata.ID}&amp;r={$userdata.rsstoken}&amp;del=1</a></code>
 	</li><br/>
 	<li>

@@ -88,7 +88,7 @@
         <small>With selected:</small>
         <div class="btn-group">
           <button type="button" class="btn btn-mini nzb_multi_operations_download"><i class="icon-download"></i> Download NZBs</button>
-          <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="icon-bookmark"></i> Bookmark</button>
+          <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="{$themevars.cart_icon}"></i> {$themevars.cart_name_add}</button>
           {if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
           {if $isadmin}
             <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
@@ -173,7 +173,7 @@
 							</td>
 							<td class="icons">
 								<div class="icon icon_nzb"><a title="Download Nzb" href="{$smarty.const.WWW_TOP}/getnzb/{$mguid[$m@index]}/{$mname[$m@index]|escape:"url"}">&nbsp;</a></div>
-								<div class="icon icon_cart" title="Add to Bookmarks"></div>
+								<div class="icon icon_cart" title="{$themevars.cart_name_add}"></div>
 								{if $sabintegrated}<div class="icon icon_sab" title="Send to my Sabnzbd"></div>{/if}
 							</td>
 						</tr>
@@ -197,7 +197,7 @@
         <small>With selected:</small>
         <div class="btn-group">
         <button type="button" class="btn btn-mini nzb_multi_operations_download"><i class="icon-download"></i> Download NZBs</button>
-        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="icon-bookmark"></i> Bookmark</button>
+        <button type="button" class="btn btn-mini nzb_multi_operations_cart"><i class="{$themevars.cart_icon}"></i> {$themevars.cart_name_add}</button>
         {if $sabintegrated}<button type="button" class="btn btn-mini nzb_multi_operations_sab"><i class="icon-download-alt"></i> Send to SAB</button>{/if}
         {if $userdata.admin}
           <button type="button" class="btn btn-mini btn-danger nzb_multi_operations_edit"><i class="icon-edit icon-white"></i></button>
