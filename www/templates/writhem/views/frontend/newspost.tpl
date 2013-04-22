@@ -1,7 +1,7 @@
 
 <h1><a href="{$smarty.const.WWW_TOP}/news">News</a></h1>
 
-{if !$userdata.hideads}
+{if $site->adbrowse != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
 {/if}
 

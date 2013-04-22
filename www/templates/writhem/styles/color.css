@@ -7,15 +7,15 @@ site wide html styles
 */
 body { color: #515151; }
 h1, h2, h3 {	color: #485459; }
-a { color: #00890a; }
+a { color: #cb0808; }
 a:hover { color: #000; }
 
 /*
 page structure
 */
 #sidebar li li a { background: #ffffff; color: #808080; }
-#sidebar li li a:hover { color: #00890a; background-color:#EEE; }
-#sidebar li li a:hover div.icon_bullet { background-color:#00890a; }
+#sidebar li li a:hover { color: #cb0808; background-color:#EEE; }
+#sidebar li li a:hover div.icon_bullet { background-color:#cb0808; }
 #sidebar h2 { color: #485459; }
 
 div.hint, div.hint a { color:#999; }
@@ -38,7 +38,7 @@ div.error { background-color: #FED0D0; border-color: #BBB }
 Javascript referenced styles
 */
 /*! Newznab tooltip style */
-.ui-tooltip-newznab .ui-tooltip-titlebar, .ui-tooltip-newznab .ui-tooltip-content{ border-color: #363a3d; color: #00890a; }
+.ui-tooltip-newznab .ui-tooltip-titlebar, .ui-tooltip-newznab .ui-tooltip-content{ border-color: #363a3d; color: #cb0808; }
 .ui-tooltip-newznab .ui-tooltip-content{ background-color: #cfcfcf; }
 .ui-tooltip-newznab .ui-tooltip-titlebar{ background-color: #363a3d; color:white; }
 
@@ -66,29 +66,29 @@ div.nzb_multi_operations input:hover { color:#000; border-color: #000; }
 bootstrap over-rides. Set the primary colours we use here. 
 */
 .nav .dropdown-toggle .caret { border-top-color: #000; border-bottom-color: #000; }
-.nav .dropdown-toggle:hover .caret { border-top-color: #00890a; border-bottom-color: #00890a; }
+.nav .dropdown-toggle:hover .caret { border-top-color: #cb0808; border-bottom-color: #cb0808; }
 .dropdown-menu li>a:hover, .dropdown-menu li>a:focus, .dropdown-submenu:hover>a {
     color: #fff;
-    background-color: #00890a;
-    background-image: -moz-linear-gradient(top, #00890a, #00890a);
-    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#00890a), to(#00890a));
-    background-image: -webkit-linear-gradient(top, #00890a, #00890a);
-    background-image: -o-linear-gradient(top, #00890a, #00890a);
-    background-image: linear-gradient(to bottom, #00890a, #00890a);
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff00890a', endColorstr='#ffb20707', GradientType=0);
+    background-color: #cb0808;
+    background-image: -moz-linear-gradient(top, #cb0808, #cb0808);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#cb0808), to(#cb0808));
+    background-image: -webkit-linear-gradient(top, #cb0808, #cb0808);
+    background-image: -o-linear-gradient(top, #cb0808, #cb0808);
+    background-image: linear-gradient(to bottom, #cb0808, #cb0808);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcb0808', endColorstr='#ffb20707', GradientType=0);
 }
 
 
 /* used for the admin buttons, set your colour to the first colour in each. */
 .btn-inverse { 
     color: #ffffff; 
-    background-image: -moz-linear-gradient(top, #08cb08, #222222); 
-    background-image:-moz-linear-gradient(top, #08cb08, #222222);
-    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#08cb08), to(#222222));
-    background-image:-webkit-linear-gradient(top, #08cb08, #222222);
-    background-image:-o-linear-gradient(top, #08cb08, #222222);
-    background-image:linear-gradient(to bottom, #08cb08, #222222);
-    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff08cb08', endColorstr='#ff222222', GradientType=0);
+    background-image: -moz-linear-gradient(top, #cb0000, #222222); 
+    background-image:-moz-linear-gradient(top, #cb0000, #222222);
+    background-image:-webkit-gradient(linear, 0 0, 0 100%, from(#cb0000), to(#222222));
+    background-image:-webkit-linear-gradient(top, #cb0000, #222222);
+    background-image:-o-linear-gradient(top, #cb0000, #222222);
+    background-image:linear-gradient(to bottom, #cb0000, #222222);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#ffcb0000', endColorstr='#ff222222', GradientType=0);
     border-color:rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
 }
 

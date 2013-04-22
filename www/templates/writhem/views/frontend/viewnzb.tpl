@@ -1,7 +1,7 @@
 
 <h1>{$release.searchname|escape:"htmlall"}</h1>
 
-{if !$userdata.hideads && $site->addetail != ""}
+{if $site->addetail != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->addetail}</td></tr></table><br />
 {/if}
 

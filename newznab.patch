@@ -1,41 +1,6 @@
---- www/admin/role-edit.php	Mon Apr 15 22:44:34 2013
-+++ www/admin/role-edit.php	Wed Apr 17 16:10:22 2013
-@@ -31,18 +31,19 @@
- 				$role["defaultinvites"] = '';
- 				$role["canpreview"] = 0;
- 				$role["canpre"] = 0;
-+				$role["hideads"] = 0;
- 				$page->smarty->assign('role', $role);	
- 
- 			break;
-     case 'submit':
- 	    	if ($_POST["id"] == "")
- 	    	{
--					$ret = $users->addRole($_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['canpreview'], $_POST['canpre']);
-+					$ret = $users->addRole($_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['canpreview'], $_POST['canpre'], $_POST['hideads']);
- 					header("Location:".WWW_TOP."/role-list.php");
- 	    	}
- 	    	else
- 	    	{
--					$ret = $users->updateRole($_POST['id'], $_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['isdefault'], $_POST['canpreview'], $_POST['canpre']);
-+					$ret = $users->updateRole($_POST['id'], $_POST['name'], $_POST['apirequests'], $_POST['downloadrequests'], $_POST['defaultinvites'], $_POST['isdefault'], $_POST['canpreview'], $_POST['canpre'], $_POST['hideads']);
- 					header("Location:".WWW_TOP."/role-list.php");
- 
- 					$_POST['exccat'] = (!isset($_POST['exccat']) || !is_array($_POST['exccat'])) ? array() : $_POST['exccat'];
---- www/lib/framework/basepage.php	Mon Apr 15 22:44:34 2013
-+++ www/lib/framework/basepage.php	Tue Apr 16 14:36:50 2013
-@@ -53,6 +53,10 @@
- 		
- 		$this->smarty->assign('site', $this->site);
- 		$this->smarty->assign('page', $this);
-+        
-+        if (file_exists(WWW_DIR.'templates/'.$this->site->style.'/theme.php'))
-+            require_once(WWW_DIR.'templates/'.$this->site->style.'/theme.php');
-+        $this->smarty->assign('themevars', (isset($themevars) ? $themevars : null));
- 		
- 		if (isset($_SERVER["SERVER_NAME"]))
- 		{
-@@ -65,6 +69,8 @@
+--- www/lib/framework/basepage.php	Mon Apr 22 09:12:06 2013
++++ www/lib/framework/basepage.php	Mon Apr 22 09:13:07 2013
+@@ -66,6 +66,8 @@
  		$users = new Users();
  		if ($users->isLoggedIn())
  		{
@@ -44,7 +9,7 @@
  			$this->userdata = $users->getById($users->currentUserId());
  			
  			//
-@@ -98,6 +104,9 @@
+@@ -106,6 +108,9 @@
  		}
  		else
  		{
@@ -54,135 +19,3 @@
  			$this->smarty->assign('isadmin',"false");	
  			$this->smarty->assign('loggedin',"false");	
  			$this->floodCheck(false, "");
---- www/lib/users.php	Mon Apr 15 22:44:34 2013
-+++ www/lib/users.php	Wed Apr 17 16:51:32 2013
-@@ -286,7 +286,7 @@
- 	public function getById($id)
- 	{			
- 		$db = new DB();
--		$sql = sprintf("select users.*, userroles.name as rolename, userroles.canpreview, userroles.canpre, userroles.apirequests, userroles.downloadrequests, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
-+		$sql = sprintf("select users.*, userroles.name as rolename, userroles.*, NOW() as now from users inner join userroles on userroles.ID = users.role where users.id = %d ", $id);
- 		return $db->queryOneRow($sql);		
- 	}	
- 	
-@@ -810,20 +810,20 @@
- 		return $db->queryOneRow("select * from userroles where isdefault = 1");
- 	}
- 	
--	public function addRole($name, $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre)
-+	public function addRole($name, $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre, $hideads)
- 	{
- 		$db = new DB();
--		$sql = sprintf("insert into userroles (name, apirequests, downloadrequests, defaultinvites, canpreview, canpre) VALUES (%s, %d, %d, %d, %d, %d)", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre);
-+		$sql = sprintf("insert into userroles (name, apirequests, downloadrequests, defaultinvites, canpreview, canpre, hideads) VALUES (%s, %d, %d, %d, %d, %d)", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $canpreview, $canpre, $hideads);
- 		return $db->queryInsert($sql);
- 	}
- 	
--	public function updateRole($id, $name, $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre)
-+	public function updateRole($id, $name, $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre, $hideads)
- 	{
- 		$db = new DB();
- 		if ($isdefault == 1)
- 			$db->query("update userroles set isdefault=0");
- 			
--		return $db->query(sprintf("update userroles set name=%s, apirequests=%d, downloadrequests=%d, defaultinvites=%d, isdefault=%d, canpreview=%d, canpre=%d WHERE ID=%d", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre, $id));
-+		return $db->query(sprintf("update userroles set name=%s, apirequests=%d, downloadrequests=%d, defaultinvites=%d, isdefault=%d, canpreview=%d, canpre=%d, hideads=%d WHERE ID=%d", $db->escapeString($name), $apirequests, $downloadrequests, $defaultinvites, $isdefault, $canpreview, $canpre, $hideads, $id));
- 	}
- 	
- 	public function deleteRole($id)
---- www/pages/filelist.php	Mon Apr 15 22:46:34 2013
-+++ www/pages/filelist.php	Mon Apr 15 17:55:50 2013
-@@ -34,7 +34,17 @@
- 	$page->meta_keywords = "view,nzb,file,list,description,details";
- 	$page->meta_description = "View Nzb File List";
- 	
--	$page->content = $page->smarty->fetch('viewfilelist.tpl');
--	$page->render();
--}
-+	$modal = false;
-+	if (isset($_GET['modal'])) 
-+	{
-+		$modal = true;
-+		$page->smarty->assign('modal', true);
-+	}
- 
-+	$page->content = $page->smarty->fetch('viewfilelist.tpl');
-+	
-+	if ($modal)
-+		echo $page->content;
-+	else
-+		$page->render();
-+}
-\ No newline at end of file
---- www/index.php	Mon Apr 15 23:44:50 2013
-+++ www/index.php	Wed Apr 17 14:50:40 2013
-@@ -15,65 +15,7 @@
- $page = new Page;
- $users = new Users;
- 
--switch($page->page) {
--	case 'content':
--	case 'sendtosab':
--	case 'dlbrowse':
--	case 'browse':
--	case 'books':
--	case 'browsegroup':
--	case 'getnzb':
--	case 'search':
--	case 'searchraw':
--	case 'rss':
--	case 'api':
--	case 'apihelp':
--	case 'movies':
--	case 'movie':
--	case 'series':
--	case 'anime':
--	case 'music':
--	case 'opensearch':
--	case 'musicmodal':
--	case 'consolemodal':
--	case 'bookmodal':
--	case 'console':
--	case 'nfo':
--	case 'predb':
--	case 'details':
--	case 'forum':
--	case 'forumpost':
--	case 'filelist':
--	case 'getimage':
--	case 'cart':
--	case 'myshows':
--	case 'mymovies':
--	case 'mymoviesedit':
--	case 'queue':
--	case 'queuedata':
--	case 'profile':
--	case 'profileedit':
--	case 'login':
--	case 'logout':
--	case 'register':
--	case 'forgottenpassword':
--	case 'sitemap':
--	case 'contact-us':
--	case 'terms-and-conditions':
--	case 'ajax_profile':
--	case 'ajax_release-admin':
--	case 'ajax_resetusergrabs-admin':
--	case 'ajax_rarfilelist':
--	case 'ajax_tvinfo':
--	case 'ajax_mediainfo':
--	case 'ajax_mymovies':
--	case 'ajax_preinfo':
--	case 'calendar':
--    case 'nzbvortex':
--	case 'upcoming':
--		include(WWW_DIR.'pages/'.$page->page.'.php');
--	break;
--	default:
--		$page->show404();
--	break;
--}
-+if (file_exists(WWW_DIR.'pages/'.$page->page.'.php'))
-+    include(WWW_DIR.'pages/'.$page->page.'.php');
-+else
-+    $page->show404();

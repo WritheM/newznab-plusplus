@@ -25,6 +25,3 @@ INSERT INTO  `newznab`.`newspost`
 SELECT * 
 FROM  `newznab`.`forumpost` ;
 */
-
-/* Premium ads stuff */
-ALTER TABLE  `userroles` ADD  `hideads` TINYINT( 1 ) NOT NULL DEFAULT  '0'

@@ -1,7 +1,7 @@
  
 <h1>Browse Groups</h1>
 
-{if !$userdata.hideads && $site->adbrowse != ""}
+{if $site->adbrowse != ""}
 <table class="adblock" cellspacing="0" cellpadding="0"><tr><td>{$site->adbrowse}</td></tr></table><br />
 {/if}
 	
