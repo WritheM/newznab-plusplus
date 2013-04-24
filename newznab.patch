@@ -19,35 +19,6 @@
  			$this->smarty->assign('isadmin',"false");	
  			$this->smarty->assign('loggedin',"false");	
  			$this->floodCheck(false, "");
---- www/lib/releaseextra.php	Mon Apr 15 22:44:07 2013
-+++ www/lib/releaseextra.php	Wed Apr 24 12:15:10 2013
-@@ -85,7 +85,25 @@
- 	public function getAudio($id)
- 	{
- 		$db = new DB();
--		return $db->query(sprintf("select * from releaseaudio where releaseID = %d order by audioID ASC", $id));	
-+		$result = $db->query(sprintf("select * from releaseaudio where releaseID = %d order by audioID ASC", $id));	
-+        
-+        $theme = $db->queryOneRow("SELECT value FROM site WHERE setting = 'style';");
-+        $jsonFile = realpath(dirname(__FILE__))."/../templates/{$theme['value']}/flags.json";
-+        
-+        if (file_exists($jsonFile))
-+        {
-+            $json = file_get_contents($jsonFile);                 
-+            $languageFlags = json_decode(utf8_encode($json));
-+            
-+            foreach($result as $key => $value) {
-+                if (isset($languageFlags->$result[$key]['audiolanguage']))
-+                    $result[$key]['audioflag'] = $languageFlags->$result[$key]['audiolanguage'];
-+                elseif ($result[$key]['audiolanguage'] != '')
-+                    $result[$key]['audioflag'] = $languageFlags->Default;
-+            }
-+        }
-+        
-+        return $result;
- 	}
- 
- 	/**
 --- www/pages/browse.php	Mon Apr 15 22:46:07 2013
 +++ www/pages/browse.php	Wed Apr 24 14:50:46 2013
 @@ -1,8 +1,10 @@

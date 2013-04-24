@@ -161,8 +161,8 @@
             {/if}
 					{/strip}</div>
           {foreach from=$result.reAudio item=audio}
-						{if $audio.audioflag != ""}
-							<i class="icon-flag {$audio.audioflag}" title="{$audio.audiolanguage}-{$audio.audioformat}"></i>
+						{if $audio.audiolanguage != ""}
+							<i class="icon-flag flag {$audio.audiolanguage|lower|replace:' ':'_'|replace:'(':''|replace:')':''}" title="{$audio.audiolanguage}-{$audio.audioformat}"></i>
 						{/if}
 					{/foreach}
 				</div>
