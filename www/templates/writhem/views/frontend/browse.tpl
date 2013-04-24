@@ -126,7 +126,7 @@
           <div class="badge label-warning">
             <i class="icon-warning-sign icon-white" title="{$result.nukereason}"></i>
             {if preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|MOD|LOCAL)$/', $result.nuketype)}
-                {$result.nuketype|lower|capitalize}.{$result.nukereason}
+                {$result.nuketype|upper}D
             {/if}
           </div>
 				{/if}

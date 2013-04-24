@@ -90,9 +90,10 @@ jQuery(function($){
 		return false;
 	});
 	$('.icon_sab').click(function(e){ // replace with cookies?
+        console.log($(this).parent().parent().attr('id').substring(4));
 		if ($(this).hasClass('icon_sab_clicked')) return false;
 
-		var guid = $(this).parent().parent().parent().parent().attr('id').substring(4);
+		var guid = $(this).parent().parent().attr('id').substring(4);
 		var nzburl = SERVERROOT + "sendtosab/" + guid;
 
 		$.post(nzburl, function(resp){
