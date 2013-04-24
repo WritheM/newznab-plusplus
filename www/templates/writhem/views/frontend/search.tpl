@@ -140,7 +140,6 @@
       </thead>
     </tr>
 	{foreach from=$results item=result}
-    {writhem_assign_reAudio id=$result["ID"]}
 		<tr class="{if $lastvisit|strtotime<$result.adddate|strtotime}success{/if}" id="guid{$result.guid}">
 			<td style="padding:5px;" class="check"><input id="chk{$result.guid|substr:0:7}" type="checkbox" class="nzb_check" name="id[]" value="{$result.guid}" /></td>
 			<td class="item">
@@ -175,7 +174,7 @@
 						{if $result.tvairdate != ""}<span class="btn btn-mini disabled" title="{$result.tvtitle} Aired on {$result.tvairdate|date_format}">Aired {if $result.tvairdate|strtotime > $smarty.now}in future{else}{$result.tvairdate|daysago}{/if}</span>{/if}
 						{if $result.reID > 0}<span class="mediainfo btn btn-mini disabled" title="{$result.guid}">Media</span>{/if}
 					</div>
-          {foreach from=$reAudio item=audio}
+          {foreach from=$result.reAudio item=audio}
 						{if $audio.audioflag != ""}
 							<i class="icon-flag {$audio.audioflag}" title="{$audio.audiolanguage}-{$audio.audioformat}"></i>
 						{/if}

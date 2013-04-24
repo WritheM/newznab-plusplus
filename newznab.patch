@@ -1,5 +1,5 @@
---- www/lib/framework/basepage.php	Mon Apr 22 09:12:06 2013
-+++ www/lib/framework/basepage.php	Mon Apr 22 09:13:07 2013
+--- www/lib/framework/basepage.php	Sat Apr 20 20:56:07 2013
++++ www/lib/framework/basepage.php	Mon Apr 22 09:54:11 2013
 @@ -66,6 +66,8 @@
  		$users = new Users();
  		if ($users->isLoggedIn())
@@ -19,3 +19,65 @@
  			$this->smarty->assign('isadmin',"false");	
  			$this->smarty->assign('loggedin',"false");	
  			$this->floodCheck(false, "");
+--- www/lib/releaseextra.php	Mon Apr 15 22:44:07 2013
++++ www/lib/releaseextra.php	Wed Apr 24 12:15:10 2013
+@@ -85,7 +85,25 @@
+ 	public function getAudio($id)
+ 	{
+ 		$db = new DB();
+-		return $db->query(sprintf("select * from releaseaudio where releaseID = %d order by audioID ASC", $id));	
++		$result = $db->query(sprintf("select * from releaseaudio where releaseID = %d order by audioID ASC", $id));	
++        
++        $theme = $db->queryOneRow("SELECT value FROM site WHERE setting = 'style';");
++        $jsonFile = realpath(dirname(__FILE__))."/../templates/{$theme['value']}/flags.json";
++        
++        if (file_exists($jsonFile))
++        {
++            $json = file_get_contents($jsonFile);                 
++            $languageFlags = json_decode(utf8_encode($json));
++            
++            foreach($result as $key => $value) {
++                if (isset($languageFlags->$result[$key]['audiolanguage']))
++                    $result[$key]['audioflag'] = $languageFlags->$result[$key]['audiolanguage'];
++                elseif ($result[$key]['audiolanguage'] != '')
++                    $result[$key]['audioflag'] = $languageFlags->Default;
++            }
++        }
++        
++        return $result;
+ 	}
+ 
+ 	/**
+--- www/pages/search.php	Mon Apr 15 22:46:07 2013
++++ www/pages/search.php	Wed Apr 24 12:42:01 2013
+@@ -1,9 +1,11 @@
+ <?php
+ require_once(WWW_DIR."/lib/releases.php");
++require_once(WWW_DIR."/lib/releaseextra.php");
+ require_once(WWW_DIR."/lib/groups.php");
+ require_once(WWW_DIR."/lib/category.php");
+ 
+ $releases = new Releases;
++$re = new ReleaseExtra;
+ $grp = new Groups;
+ $c = new Category;
+ 
+@@ -47,6 +49,18 @@
+ 		$page->smarty->assign('search', $searchStr);
+ 
+ 		$results = $releases->search($searchStr, $categoryId, $offset, ITEMS_PER_PAGE, $orderby, -1, $page->userdata["categoryexclusions"]);
++        
++        foreach($results as $key => $value)
++        {
++            $results[$key]['reAudio'] = $re->getAudio($value['ID']);
++            $results[$key]['reVideo'] = $re->getVideo($value['ID']);
++            if(isset($results[$key]['reVideo']))
++            {
++                $width = $results[$key]['reVideo']['videowidth'];
++                $height = $results[$key]['reVideo']['videoheight'];
++                $results[$key]['reRes'] = $re->determineVideoResolution($width, $height);
++            }
++        }
+ 
+ 	}
+ 	else
