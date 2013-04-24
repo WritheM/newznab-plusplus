@@ -48,8 +48,41 @@
  	}
  
  	/**
+--- www/pages/browse.php	Mon Apr 15 22:46:07 2013
++++ www/pages/browse.php	Wed Apr 24 14:50:46 2013
+@@ -1,8 +1,10 @@
+ <?php
+ require_once(WWW_DIR."/lib/releases.php");
++require_once(WWW_DIR."/lib/releaseextra.php");
+ require_once(WWW_DIR."/lib/category.php");
+ 
+ $releases = new Releases;
++$re = new ReleaseExtra;
+ 
+ if (!$users->isLoggedIn())
+         $page->show403();
+@@ -27,6 +29,19 @@
+ 
+ $results = array();
+ $results = $releases->getBrowseRange($catarray, $offset, ITEMS_PER_PAGE, $orderby, -1, $page->userdata["categoryexclusions"], $grp);
++
++foreach($results as $key => $value)
++{
++    $results[$key]['reAudio'] = $re->getAudio($value['ID']);
++    $results[$key]['reVideo'] = $re->getVideo($value['ID']);
++    if($results[$key]['reVideo'] != "")
++    {
++        $width = $results[$key]['reVideo']['videowidth'];
++        $height = $results[$key]['reVideo']['videoheight'];
++        $results[$key]['reRes'] = $re->determineVideoResolution($width, $height);
++    }
++}
++
+ 
+ $page->smarty->assign('pagertotalitems',$browsecount);
+ $page->smarty->assign('pageroffset',$offset);
 --- www/pages/search.php	Mon Apr 15 22:46:07 2013
-+++ www/pages/search.php	Wed Apr 24 12:42:01 2013
++++ www/pages/search.php	Wed Apr 24 14:51:22 2013
 @@ -1,9 +1,11 @@
  <?php
  require_once(WWW_DIR."/lib/releases.php");
@@ -71,7 +104,7 @@
 +        {
 +            $results[$key]['reAudio'] = $re->getAudio($value['ID']);
 +            $results[$key]['reVideo'] = $re->getVideo($value['ID']);
-+            if(isset($results[$key]['reVideo']))
++            if($results[$key]['reVideo'] != "")
 +            {
 +                $width = $results[$key]['reVideo']['videowidth'];
 +                $height = $results[$key]['reVideo']['videoheight'];

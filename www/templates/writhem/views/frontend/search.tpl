@@ -153,9 +153,9 @@
 				{/if}
         {if $userdata.canpre == 1 && $result.nuketype != ''}
           <div class="badge label-warning">
-            <i class="icon-warning-sign icon-white" title="{$predb.nukereason}"></i>
+            <i class="icon-warning-sign icon-white" title="{$result.nukereason}"></i>
             {if preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|MOD|LOCAL)$/', $result.nuketype)}
-                {$result.nuketype|lower|capitalize}
+                {$result.nuketype}
             {/if}
           </div>
         {/if}
@@ -173,6 +173,14 @@
 						{if $result.bookinfoID > 0}<a href="#" name="name{$result.bookinfoID}" title="View book info" class="modal_book btn btn-mini" rel="console" >Cover</a>{/if}
 						{if $result.tvairdate != ""}<span class="btn btn-mini disabled" title="{$result.tvtitle} Aired on {$result.tvairdate|date_format}">Aired {if $result.tvairdate|strtotime > $smarty.now}in future{else}{$result.tvairdate|daysago}{/if}</span>{/if}
 						{if $result.reID > 0}<span class="mediainfo btn btn-mini disabled" title="{$result.guid}">Media</span>{/if}
+						{if $result.reRes > 0}
+              <span class="btn btn-mini disabled" title="{$result.reVideo.videowidth}x{$result.reVideo.videoheight}">
+              {if $result.reRes == 1}SD
+              {elseif $result.reRes == 2}HD
+              {elseif $result.reRes == 3}HD+
+              {/if}
+              </span>
+            {/if}
 					</div>
           {foreach from=$result.reAudio item=audio}
 						{if $audio.audioflag != ""}

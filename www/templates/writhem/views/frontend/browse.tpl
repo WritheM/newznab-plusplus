@@ -111,8 +111,6 @@
 		</tr>
 
 		{foreach from=$results item=result}
-    {writhem_assign_reAudio id=$result["ID"]}
-
 		<tr class="{if $lastvisit|strtotime<$result.adddate|strtotime}success{/if}" id="guid{$result.guid}">
 			<td class="check"><input id="chk{$result.guid|substr:0:7}" type="checkbox" class="nzb_check" value="{$result.guid}" /></td>
 			<td class="item">
@@ -125,7 +123,12 @@
           <div class="label label-warning"><i class="icon-lock icon-white" title="Unable to determine Password status"></i>Unknown password status</div>
         {/if}
 				{if $userdata.canpre == 1 && $result.nuketype != ''}
-					<i class="icon-warning-sign" title="{$result.nuketype}"></i>
+          <div class="badge label-warning">
+            <i class="icon-warning-sign icon-white" title="{$result.nukereason}"></i>
+            {if preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|MOD|LOCAL)$/', $result.nuketype)}
+                {$result.nuketype|lower|capitalize}.{$result.nukereason}
+            {/if}
+          </div>
 				{/if}
 				
 				<div class="resextra">
@@ -148,8 +151,16 @@
 						{if $result.anidbID > 0}<a class="btn btn-mini" href="{$smarty.const.WWW_TOP}/anime/{$result.anidbID}" title="View all episodes">View Anime</a>{/if}
 						{if $result.tvairdate != ""}<span class="seriesinfo btn btn-mini disabled" title="{$result.guid}">Aired {if $result.tvairdate|strtotime > $smarty.now}in future{else}{$result.tvairdate|daysago}{/if}</span>{/if}
 						{if $result.reID > 0}<span class="mediainfo btn btn-mini disabled" title="{$result.guid}">Media</span>{/if}
+            {if $result.reRes > 0}
+              <span class="btn btn-mini disabled" title="{$result.reVideo.videowidth}x{$result.reVideo.videoheight}">
+              {if $result.reRes == 1}SD
+              {elseif $result.reRes == 2}HD
+              {elseif $result.reRes == 3}HD+
+              {/if}
+              </span>
+            {/if}
 					{/strip}</div>
-          {foreach from=$reAudio item=audio}
+          {foreach from=$result.reAudio item=audio}
 						{if $audio.audioflag != ""}
 							<i class="icon-flag {$audio.audioflag}" title="{$audio.audiolanguage}-{$audio.audioformat}"></i>
 						{/if}
