@@ -54,7 +54,7 @@ class News
 	public function getPosts($parent)
 	{
 		$db = new DB();
-		return $db->query(sprintf(" SELECT newspost.*, CASE WHEN role=%d THEN 1 ELSE 0 END  AS 'isadmin', users.username from newspost left outer join users on users.ID = newspost.userID where newspost.ID = %d or parentID = %d order by createddate asc limit 250", Users::ROLE_ADMIN, $parent, $parent));		
+		return $db->query(sprintf(" SELECT newspost.*, CASE WHEN role=%d THEN 1 ELSE 0 END  AS 'isadmin', users.username, users.role as userrole, userroles.name as rolename from newspost left outer join users on users.ID = newspost.userID left outer join userroles on userroles.ID = users.role where newspost.ID = %d or parentID = %d order by createddate asc limit 250", Users::ROLE_ADMIN, $parent, $parent));		
 	}
 
 	/**

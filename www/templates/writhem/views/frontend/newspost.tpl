@@ -22,9 +22,9 @@
 	{foreach from=$results item=result name=result}
 		<tr class="{cycle values=",alt"}">
 			<td width="15%;">
-				{if $result.isadmin}<i class="icon-font" title="{$result|print_r}"></i>
-				{elseif $result.isdonator}<i class="icon-certificate" title="User has Donated"></i>
-				{else}<i class="icon-user" title="Normal User"></i>
+				{if $result.isadmin}<i class="icon-font" title="{$result.rolename}"></i>
+				{elseif $result.userrole == "4"}<i class="icon-certificate" title="{$result.rolename}"></i>
+				{else}<i class="icon-user" title="{$result.rolename}"></i>
 				{/if}
 				{if $result.isadmin}<strong>{/if}
 				<a {if $smarty.foreach.result.last}id="last"{/if} title="{if $result.isadmin == 1}Admin{else}View profile{/if}" href="{$smarty.const.WWW_TOP}/profile/?name={$result.username}">{$result.username}</a>
@@ -32,7 +32,7 @@
 				{if $result.isadmin}</strong>{/if}
 				<br/>
 				on <span title="{$result.createddate}">{$result.createddate|date_format}</span> <div class="hint">({$result.createddate|timeago})</div>
-				{if $userdata.role}
+				{if $isadmin}
 				<div>
 					<a class="btn btn-mini btn-inverse confirm_action" href="{$smarty.const.WWW_TOP}/admin/forum-delete.php?id={$result.ID}&amp;from={$smarty.server.REQUEST_URI|escape:"url"}" title="Delete Post">Delete</a>
 				</div>

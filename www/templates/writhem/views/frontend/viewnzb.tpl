@@ -497,9 +497,9 @@
             {if $comment.role == 2}</strong>{/if}
           {else}
             {if $isadmin}
-             <i class="icon-globe" title="Syndicated User"></i> {$comment.username} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}">{writhem_spotnab_name id=$comment.sourceid}</a>
+             <i class="icon-globe" title="{$comment.rolename}"></i> {$comment.username} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}">{writhem_spotnab_name id=$comment.sourceid}</a>
             {else}
-             <i class="icon-globe" title="Syndicated User"></i> {$comment.username}
+             <i class="icon-globe" title="{$comment.rolename}"></i> {$comment.username}
             {/if}
           {/if}
             <br/>{$comment.createddate|daysago}

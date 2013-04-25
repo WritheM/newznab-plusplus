@@ -19,7 +19,27 @@
  			$this->smarty->assign('isadmin',"false");	
  			$this->smarty->assign('loggedin',"false");	
  			$this->floodCheck(false, "");
---- www/pages/browse.php	Mon Apr 15 22:46:07 2013
+--- www/lib/releasecomments.php	Mon Apr 15 22:44:07 2013
++++ www/lib/releasecomments.php	Wed Apr 24 18:00:05 2013
+@@ -22,7 +22,7 @@
+ 	public function getCommentsByGid($gid)
+ 	{			
+ 		$db = new DB();
+-		return $db->query(sprintf("SELECT rc.id, text, createddate, sourceid, CASE WHEN sourceid = 0 THEN (SELECT username FROM users WHERE id = userid) ELSE username END AS username FROM releasecomment rc WHERE isvisible = 1  AND gid = %s AND (userID IN (SELECT id FROM users) OR rc.username IS NOT NULL) ORDER BY createddate DESC LIMIT 100", $db->escapeString($gid)));				
++		return $db->query(sprintf("SELECT rc.id, text, createddate, sourceid, CASE WHEN sourceid = 0 THEN (SELECT username FROM users WHERE id = userid) ELSE username END AS username, CASE WHEN sourceid = 0 THEN (SELECT role FROM users WHERE id = userid) ELSE '-1' END AS role, CASE WHEN sourceid =0 THEN (SELECT r.name AS rolename FROM users AS u LEFT JOIN userroles AS r ON r.ID = u.role WHERE u.id = userid) ELSE  'Syndicated' END AS rolename FROM releasecomment rc WHERE isvisible = 1  AND gid = %s AND (userID IN (SELECT id FROM users) OR rc.username IS NOT NULL) ORDER BY createddate DESC LIMIT 100", $db->escapeString($gid)));				
+ 	}
+ 
+ 	/**
+@@ -31,7 +31,7 @@
+ 	public function getCommentsByGuid($guid)
+ 	{			
+ 		$db = new DB();
+-		return $db->query(sprintf("SELECT rc.id, text, createddate, sourceid, CASE WHEN sourceid = 0 THEN (SELECT username FROM users WHERE id = userid) ELSE username END AS username FROM releasecomment rc LEFT JOIN releases r ON r.gid = rc.gid WHERE isvisible = 1 AND guid = %s AND (userID IN (SELECT id FROM users) OR rc.username IS NOT NULL) ORDER BY createddate DESC LIMIT 100", $db->escapeString($guid)));	
++		return $db->query(sprintf("SELECT rc.id, text, createddate, sourceid, CASE WHEN sourceid = 0 THEN (SELECT username FROM users WHERE id = userid) ELSE username END AS username, CASE WHEN sourceid = 0 THEN (SELECT role FROM users WHERE id = userid) ELSE '-1' END AS role, CASE WHEN sourceid =0 THEN (SELECT r.name AS rolename FROM users AS u LEFT JOIN userroles AS r ON r.ID = u.role WHERE u.id = userid) ELSE  'Syndicated' END AS rolename FROM releasecomment rc LEFT JOIN releases r ON r.gid = rc.gid WHERE isvisible = 1 AND guid = %s AND (userID IN (SELECT id FROM users) OR rc.username IS NOT NULL) ORDER BY createddate DESC LIMIT 100", $db->escapeString($guid)));	
+ 	}
+ 
+ 	/**
+--- www/pages/browse.php	Wed Apr 24 15:58:53 2013
 +++ www/pages/browse.php	Wed Apr 24 14:50:46 2013
 @@ -1,8 +1,10 @@
  <?php
