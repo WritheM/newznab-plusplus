@@ -96,24 +96,55 @@
 			</li>
 			{/if}
 		{/foreach}
+    {if $themevars.search_bar_docked}
+    <!-- search bar -->
+    <li class="pull-right" style="float:right;margin-left:3px;">
+      <form id="headsearch_form" action="{$smarty.const.WWW_TOP}/search/" method="get" class="navbar-search pull-right">
+        {if $themevars.search_bar_advanced}
+        <div class="input-prepend input-append">
+          <select id="headcat" name="t" tabindex="2" style="width:125px;">
+            <option class="grouping" value="-1">All</option>
+            {foreach from=$parentcatlist item=parentcat}
+              <option {if $header_menu_cat==$parentcat.ID}selected="selected"{/if} class="grouping" value="{$parentcat.ID}">{$parentcat.title}</option>
+              {foreach from=$parentcat.subcatlist item=subcat}
+                <option {if $header_menu_cat==$subcat.ID}selected="selected"{/if} value="{$subcat.ID}">&nbsp;&nbsp;{$subcat.title}</option>
+              {/foreach}
+            {/foreach}
+          </select>
+        {else}
+        <div class="input-append">
+        {/if}
+          <input id="headsearch" name="search" type="text" placeholder="{if $header_menu_search == ""}Enter keywords{else}{$header_menu_search|escape:"htmlall"}{/if}" style="width:{if $themevars.search_bar_width > 0}{$themevars.search_bar_width}{else}100{/if}px;" type="text" tabindex="1" />
+          <button type="button" id="headsearch_go" class="btn"><i class="icon-search"></i></button>
+        </div>
+      </form>
+    </li>
+    {/if}
+
 		</ul>
 	</div>		
+  {if !$themevars.search_bar_docked}
 	<!-- search bar -->
-	<form id="headsearch_form" action="{$smarty.const.WWW_TOP}/search/" method="get" class="navbar-search pull-right">
-		<div class="input-prepend input-append">
-			<select id="headcat" name="t" tabindex="2" style="width:125px;">
-				<option class="grouping" value="-1">All</option>
-				{foreach from=$parentcatlist item=parentcat}
-					<option {if $header_menu_cat==$parentcat.ID}selected="selected"{/if} class="grouping" value="{$parentcat.ID}">{$parentcat.title}</option>
-					{foreach from=$parentcat.subcatlist item=subcat}
-						<option {if $header_menu_cat==$subcat.ID}selected="selected"{/if} value="{$subcat.ID}">&nbsp;&nbsp;{$subcat.title}</option>
-					{/foreach}
-				{/foreach}
-			</select>
-			<input id="headsearch" name="search" type="text" class="search-query" placeholder="{if $header_menu_search == ""}Enter keywords{else}{$header_menu_search|escape:"htmlall"}{/if}" style="width:85px;" type="text" tabindex="1" />
-			<button type="button" id="headsearch_go" class="btn"><i class="icon-search"></i></button>
-		</div>
-			
-			
-	</form>
+  <div class="pull-right" style="width:100%">
+    <form id="headsearch_form" action="{$smarty.const.WWW_TOP}/search/" method="get" class="navbar-search pull-right">
+      {if $themevars.search_bar_advanced}
+      <div class="input-prepend input-append">
+        <select id="headcat" name="t" tabindex="2" style="width:125px;">
+          <option class="grouping" value="-1">All</option>
+          {foreach from=$parentcatlist item=parentcat}
+            <option {if $header_menu_cat==$parentcat.ID}selected="selected"{/if} class="grouping" value="{$parentcat.ID}">{$parentcat.title}</option>
+            {foreach from=$parentcat.subcatlist item=subcat}
+              <option {if $header_menu_cat==$subcat.ID}selected="selected"{/if} value="{$subcat.ID}">&nbsp;&nbsp;{$subcat.title}</option>
+            {/foreach}
+          {/foreach}
+        </select>
+      {else}
+      <div class="input-append">
+      {/if}
+        <input id="headsearch" name="search" type="text" placeholder="{if $header_menu_search == ""}Enter keywords{else}{$header_menu_search|escape:"htmlall"}{/if}" style="width:{if $themevars.search_bar_width > 0}{$themevars.search_bar_width}{else}100{/if}px;" type="text" tabindex="1" />
+        <button type="button" id="headsearch_go" class="btn"><i class="icon-search"></i></button>
+      </div>
+    </form>
+  </div>
+  {/if}
 </div>

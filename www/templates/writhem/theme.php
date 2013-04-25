@@ -37,3 +37,8 @@ $themevars['beta_hostname'] = array(
 $themevars['cart_name_add'] = "Add to Cart"; // used when you want to add an item to 'Add to Cart'
 $themevars['cart_name_plural'] = "Cart"; // used when referring to the items in your 'Cart'
 $themevars['cart_icon'] = 'icon-shopping-cart';//'icon-bookmark'; // a font-awesome or bootstrap icon used on buttons (need fa- to indicate fontawesome icons)
+
+// Search bar settings
+$themevars['search_bar_width'] = 180; // in pixels
+$themevars['search_bar_docked'] = false; // if true, it will show the search bar inside the header menu that docks to the top of the screen when scrolling.
+$themevars['search_bar_advanced'] = true; // show the category sub selection in the top bar. 
