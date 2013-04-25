@@ -25,8 +25,9 @@ class News
 			$db->query(sprintf("update newspost set replies = replies + 1, updateddate = now() where ID = %d", $parentid));		
 		}
 		
-		$db->queryInsert(sprintf("INSERT INTO `newspost` (`newsID`,`parentID`,`userID`,`subject`,`message`, `locked`, `sticky`, `replies`, `createddate`, `updateddate`) VALUES ( 1,  %d, %d,  %s,  %s, %d, %d, %d,NOW(),  NOW())", 
-			$parentid, $userid, $db->escapeString($subject)	, $db->escapeString($message), $locked, $sticky, $replies));
+        $query = sprintf("INSERT INTO `newspost` (`parentID`,`userID`,`subject`,`message`, `locked`, `sticky`, `replies`, `createddate`, `updateddate`) VALUES (%d, %d,  %s,  %s, %d, %d, %d,NOW(),  NOW())", 
+			$parentid, $userid, $db->escapeString($subject)	, $db->escapeString($message), $locked, $sticky, $replies);
+		$db->queryInsert($query);
 	}
 
 	/**
