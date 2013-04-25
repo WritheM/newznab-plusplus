@@ -487,22 +487,16 @@
 		{foreach from=$comments|@array_reverse:true item=comment}
 			<tr>
 				<td class="less" title="{$comment.createddate}">
-          {if $comment.sourceid == 0}
-            {if $comment.role == 2}<i class="icon-font" title="{$comment.rolename}"></i>
-            {elseif $comment.role == 4}<i class="icon-certificate" title="{$comment.rolename}"></i>
-            {else}<i class="icon-user" title="Normal User"></i>
-            {/if}
-            {if $comment.role == 2}<strong>{/if}
+          {if $comment.role == -1}<i class="icon-globe" title="Syndicated User"></i>
+            {$comment.username}{if $isadmin} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}">{$comment.rolename}</a>{/if}
+          {elseif $comment.role == 2}<i class="icon-font" title="{$comment.rolename}"></i>
+            <strong><a title="View {$comment.username}'s profile" href="{$smarty.const.WWW_TOP}/profile?name={$comment.username}">{$comment.username}</a></strong>
+          {elseif $comment.role == 4}<i class="icon-certificate" title="{$comment.rolename}"></i>
             <a title="View {$comment.username}'s profile" href="{$smarty.const.WWW_TOP}/profile?name={$comment.username}">{$comment.username}</a>
-            {if $comment.role == 2}</strong>{/if}
-          {else}
-            {if $isadmin}
-             <i class="icon-globe" title="{$comment.rolename}"></i> {$comment.username} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}">{writhem_spotnab_name id=$comment.sourceid}</a>
-            {else}
-             <i class="icon-globe" title="{$comment.rolename}"></i> {$comment.username}
-            {/if}
+          {else}<i class="icon-user" title="{$comment.username}"></i>
+            <a title="View {$comment.username}'s profile" href="{$smarty.const.WWW_TOP}/profile?name={$comment.username}">{$comment.username}</a>
           {/if}
-            <br/>{$comment.createddate|daysago}
+          <br/>{$comment.createddate|daysago}
         </td>
 				<td>{$comment.text|escape:"htmlall"|nl2br}</td>
 			</tr>
