@@ -106,34 +106,38 @@
 	<div id="page">
 		
 		<div id="content">
-			{if isset($themevars['beta_hostname']) && in_array(gethostname(),$themevars['beta_hostname'])}
-                <script>
-                jQuery(document).ready(function() { 
-                    var cookie = $.cookie('hide_beta');
-                    if (cookie) {
-                        jQuery('#alert_beta').hide();
-                    }
-                    var cookie = $.cookie('hide_ssl');
-                    if (cookie) {
-                        jQuery('#alert_ssl').hide();
-                    }
-                }); 
-                </script>
+			{if isset($themevars.beta_hostname) && in_array(gethostname(),$themevars.beta_hostname)}
+        <script>
+        jQuery(document).ready(function() { 
+            var cookie = $.cookie('hide_beta');
+            if (cookie) {
+                jQuery('#alert_beta').hide();
+            }
+        }); 
+        </script>
 				<div id="alert_beta" class="alert alert-note" >
 				  <button type="button" class="close" onclick="$.cookie('hide_beta','true');jQuery('#alert_beta').hide(200);">&times;</button>
 				  <strong>Note:</strong> You are on the beta server. Functionality and stability can not be gauranteed.
                 </div>
       {else}
-        {if $themevars.warn_non_ssl && $smarty.server.HTTPS != "1"}
+        {if $themevars.warn_not_ssl && $smarty.server.HTTPS != "1"}
+          <script>
+          jQuery(document).ready(function() { 
+              var cookie = $.cookie('hide_ssl');
+              if (cookie) {
+                  //jQuery('#alert_ssl').hide();
+              }
+          }); 
+          </script>
           <div id="alert_ssl" class="alert alert-info">
             <button type="button" class="close" onclick="$.cookie('hide_ssl','true');jQuery('#alert_ssl').hide(200);">&times;</button>
-            <strong>Warning!</strong> You are not connecting on SSL. Switch now? <a class="btn btn-mini" href="https://{$smarty.server.REQUEST_URI}"><i class="icon-refresh"></i> Switch to HTTPS</a>
+            <strong>Warning!</strong> You are not connecting on SSL. Switch now? <a class="btn btn-mini" href="https://{$smarty.server.HTTP_HOST}{$smarty.server.REQUEST_URI}"><i class="icon-refresh"></i> Switch to HTTPS</a>
           </div>
-        {elseif $themevars.warn_non_ssl && $userdata.role != 4 && $userdata.role != 2 && $smarty.server.HTTPS == "1"}
-          <div id="alert_ssl" class="alert alert-error">
+        {elseif $themevars.warn_not_ssl && $userdata.role != 4 && $userdata.role != 2 && $smarty.server.HTTPS == "1"}
+          <!--<div id="alert_ssl" class="alert alert-error">
             <button type="button" class="close" onclick="$.cookie('hide_ssl','true');jQuery('#alert_ssl').hide(200);">&times;</button>
             <strong>Error!</strong> You are connecting on SSL, but have not donated more than the average. Switch now? <a class="btn btn-mini" href="http://{$requesturl}"><i class="icon-refresh"></i> Switch to HTTP</a>
-          </div>
+          </div>-->
         {/if}
 			{/if}
       {if $hasunreadnews && $loggedin=="true"}
