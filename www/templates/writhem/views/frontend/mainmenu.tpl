@@ -2,7 +2,26 @@
 <li class="menu_main">
     {if $loggedin=="true" && $themevars.update_logs}
     <h2>Realtime Status</h2>
-    <center>{writhem_update_progress update_logs=$themevars.update_logs}</center>
+    <center>
+    {foreach from=$themevars.update_logs item=file}
+      {assign var="icon" value="black.png"}
+      {assign var="title" value="{$file[1]} - Paused"}
+      {if file_exists($file[0])}
+        {assign var="update_sec_ago" value=(time() - filemtime($file[0]))/60}
+        {if $update_sec_ago < 360}
+            {assign var="icon" value="green.png"}
+            {assign var="title" value="{$file[1]} - Scanning"}
+        {elseif $update_sec_ago < 1440}
+            {assign var="icon" value="orange.png"}
+            {assign var="title" value="{$file[1]} - Lagging"}
+        {elseif $update_sec_ago < 10080}
+            {assign var="icon" value="red.png"}
+            {assign var="title" value="{$file[1]} - Stalled"}
+        {/if}
+      {/if}
+      <img src='{$smarty.const.WWW_TOP}/templates/writhem/images/status/{$icon}' title='{$title}'>
+    {/foreach}
+    </center>
     {/if}
 	<h2>Menu</h2> 
 	<ul class="nav nav-tabs nav-stacked">
