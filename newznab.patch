@@ -1,5 +1,5 @@
 --- www/lib/framework/basepage.php	Sat Apr 20 20:56:07 2013
-+++ www/lib/framework/basepage.php	Mon Apr 22 09:54:11 2013
++++ www/lib/framework/basepage.php	Mon Apr 29 13:00:11 2013
 @@ -66,6 +66,8 @@
  		$users = new Users();
  		if ($users->isLoggedIn())
@@ -20,7 +20,7 @@
  			$this->smarty->assign('loggedin',"false");	
  			$this->floodCheck(false, "");
 --- www/lib/releasecomments.php	Mon Apr 15 22:44:07 2013
-+++ www/lib/releasecomments.php	Thu Apr 25 09:05:24 2013
++++ www/lib/releasecomments.php	Mon Apr 29 14:06:56 2013
 @@ -22,7 +22,7 @@
  	public function getCommentsByGid($gid)
  	{			
@@ -39,6 +39,15 @@
  	}
  
  	/**
+@@ -153,7 +153,7 @@
+ 		else
+ 			$limit = " LIMIT ".$start.",".$num;
+ 		
+-		$sql = "SELECT rc.ID, userID, guid, text, createddate, sourceid, CASE WHEN sourceID = 0 THEN (SELECT username FROM users WHERE id = userID) ELSE username END AS username FROM releasecomment rc LEFT JOIN releases r ON r.gid = rc.gid WHERE isvisible = 1 AND (userID IN (SELECT id FROM users) OR rc.username IS NOT NULL) ORDER BY createddate DESC ".$limit;
++		$sql = "SELECT rc.ID, userID, guid, text, createddate, sourceid, CASE WHEN sourceID = 0 THEN (SELECT username FROM users WHERE id = userID) ELSE username END AS username, CASE WHEN sourceid = 0 THEN (SELECT role FROM users WHERE id = userid) ELSE '-1' END AS role, CASE WHEN sourceid =0 THEN (SELECT r.name AS rolename FROM users AS u LEFT JOIN userroles AS r ON r.ID = u.role WHERE u.id = userid) ELSE (SELECT description AS rolename FROM spotnabsources WHERE ID = sourceid) END AS rolename FROM releasecomment rc LEFT JOIN releases r ON r.gid = rc.gid WHERE isvisible = 1 AND (userID IN (SELECT id FROM users) OR rc.username IS NOT NULL) ORDER BY createddate DESC ".$limit;
+ 		return $db->query($sql);		
+ 	}
+ 
 --- www/pages/browse.php	Wed Apr 24 15:58:53 2013
 +++ www/pages/browse.php	Wed Apr 24 14:50:46 2013
 @@ -1,8 +1,10 @@

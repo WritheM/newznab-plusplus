@@ -45,7 +45,7 @@
       <td>{$pager}</td>
       <td style="text-align:right">
         <div class="btn-group"style="float:right;margin-top:5px;">
-          {if $userdata.rolename == "Admin"}
+          {if $isadmin}
           <a id="newpost_btn" class="btn btn-mini btn-inverse"  data-toggle="buttons-checkbox" onclick="jQuery('#newpost').toggle();">Add New</a>
           {/if}				
           <a class="btn btn-mini" href="#top">Top</a>
@@ -54,7 +54,7 @@
     </tr>
   </table>
 
-  {if $userdata.rolename == "Admin"}
+  {if $isadmin}
   <div id="newpost" style="margin-top:10px; display:none;">
     <a id="new"></a>
     <h3>Add New Post</h3>
