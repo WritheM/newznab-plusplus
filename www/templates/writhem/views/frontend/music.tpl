@@ -203,7 +203,7 @@
 
 
 					<b>Info:</b> {$result.postdate|timeago},  {$result.size|fsize_format:"MB"},  <a title="View file list" href="{$smarty.const.WWW_TOP}/filelist/{$result.guid}">{$result.totalpart} files</a>,
-            <span{if $result.comments < 1} style="opacity:0.2;"{/if}><a title="View comments for {$result.searchname|escape:"htmlall"}" href="{$smarty.const.WWW_TOP}/details/{$result.guid}/#comments">{writhem_browse_comment_count guid=$result.guid}<i class="icon-comment"></i></a></span>,
+            <span{if $result.comments < 1} style="opacity:0.2;"{/if}><a title="View comments for {$result.searchname|escape:"htmlall"}" href="{$smarty.const.WWW_TOP}/details/{$result.guid}/#comments">{$result.comments}<i class="icon-comment"></i></a></span>,
             <span{if $result.grabs < 1} style="opacity:0.2;"{/if}>{$result.grabs}<i class="icon-download"></i></span>
 
 

@@ -162,7 +162,7 @@
 								<a href="{$smarty.const.WWW_TOP}/details/{$mguid[$m@index]}/{$mname[$m@index]|escape:"seourl"}">{$mname[$m@index]|escape:"htmlall"}</a>
 								<div>
 								Posted {$mpostdate[$m@index]|timeago},  {$msize[$m@index]|fsize_format:"MB"},  <a title="View file list" href="{$smarty.const.WWW_TOP}/filelist/{$mguid[$m@index]}">{$mtotalparts[$m@index]} files</a>, 
-                  <span{if $mcomments[$m@index] < 1} style="opacity:0.2;"{/if}><a title="View comments" href="{$smarty.const.WWW_TOP}/details/{$mguid[$m@index]}/#comments">{writhem_browse_comment_count guid=$mguid[$m@index]}<i class="icon-comment"></i></a></span>, 
+                  <span{if $mcomments[$m@index] < 1} style="opacity:0.2;"{/if}><a title="View comments" href="{$smarty.const.WWW_TOP}/details/{$mguid[$m@index]}/#comments">{$mcomments[$m@index]}<i class="icon-comment"></i></a></span>, 
                   <span{if $mgrabs[$m@index] < 1} style="opacity:0.2;"{/if}>{$mgrabs[$m@index]}<i class="icon-download"></i></span>,								
 								{if $mnfo[$m@index] > 0}<a href="{$smarty.const.WWW_TOP}/nfo/{$mguid[$m@index]}" title="View Nfo" class="modal_nfo" rel="nfo">Nfo</a>, {/if}
 								{if $mpass[$m@index] == 1}Passworded, {elseif $mpass[$m@index] == 2}Potential Password, {/if}

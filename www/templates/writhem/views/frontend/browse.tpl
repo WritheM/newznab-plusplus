@@ -99,7 +99,7 @@
 				</a>
 			</th>
 
-			<th style="padding-top:0px; padding-bottom:0px; min-width:25px;">stats<br/>
+			<th style="padding-top:0px; padding-bottom:0px; min-width:30px;">stats<br/>
 				<a title="Sort Descending" href="{$orderbystats_desc}">
 					<i class="fa-icon-caret-down"></i>
 				</a>
@@ -184,10 +184,10 @@
 			</td>
 			<td class="less nowrap">
         <div{if $result.comments < 1} style="opacity:0.2;"{/if}>
-          <a title="View comments" href="{$smarty.const.WWW_TOP}/details/{$result.guid}/#comments">{writhem_browse_comment_count guid=$result.guid}<i class="icon-comment"></i></a>
+          <a title="View comments" href="{$smarty.const.WWW_TOP}/details/{$result.guid}/#comments">{$result.comments} <i class="icon-comment"></i></a>
         </div>
         <div{if $result.grabs < 1} style="opacity:0.2;"{/if}>
-          {$result.grabs}<i class="icon-download"></i>
+          {$result.grabs} <i class="icon-download"></i>
         </div>
       </td>
 			<td class="icons">
