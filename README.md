@@ -1,7 +1,7 @@
 newznab-plusplus
 ================
 
-Currently based on nn+ rev: 2876
+Currently based on nn+ rev: 2878
 
 This is a theme in development, with intended purpose of becoming the new default gold standard that all themes will eventually live up to.  
 This theme only changes the front-end theme, which means if you have a custom admin section you can copy most of that over from your existing theme into the writhem nn++ theme. The one exception is the user-roles template... We've given you the ability to hide advertisements or show them based on role. 

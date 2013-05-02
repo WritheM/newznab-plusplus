@@ -1,5 +1,5 @@
---- www/lib/framework/basepage.php	Sat Apr 20 20:56:07 2013
-+++ www/lib/framework/basepage.php	Mon Apr 29 13:00:11 2013
+--- www/lib/framework/basepage.php	Thu May 02 11:23:07 2013
++++ www/lib/framework/basepage.php	Thu May 02 11:29:31 2013
 @@ -66,6 +66,8 @@
  		$users = new Users();
  		if ($users->isLoggedIn())
@@ -20,7 +20,7 @@
  			$this->smarty->assign('loggedin',"false");	
  			$this->floodCheck(false, "");
 --- www/lib/releasecomments.php	Mon Apr 15 22:44:07 2013
-+++ www/lib/releasecomments.php	Mon Apr 29 14:06:56 2013
++++ www/lib/releasecomments.php	Thu May 02 11:31:20 2013
 @@ -22,7 +22,7 @@
  	public function getCommentsByGid($gid)
  	{			
@@ -48,8 +48,8 @@
  		return $db->query($sql);		
  	}
  
---- www/pages/browse.php	Wed Apr 24 15:58:53 2013
-+++ www/pages/browse.php	Wed Apr 24 14:50:46 2013
+--- www/pages/browse.php	Mon Apr 15 22:46:07 2013
++++ www/pages/browse.php	Thu May 02 11:35:47 2013
 @@ -1,8 +1,10 @@
  <?php
  require_once(WWW_DIR."/lib/releases.php");
@@ -82,7 +82,7 @@
  $page->smarty->assign('pagertotalitems',$browsecount);
  $page->smarty->assign('pageroffset',$offset);
 --- www/pages/search.php	Mon Apr 15 22:46:07 2013
-+++ www/pages/search.php	Wed Apr 24 14:51:22 2013
++++ www/pages/search.php	Thu May 02 11:37:11 2013
 @@ -1,9 +1,11 @@
  <?php
  require_once(WWW_DIR."/lib/releases.php");
