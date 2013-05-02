@@ -6,6 +6,7 @@ www/lib/*
 !www/lib/news.php
 !www/lib/smarty/plugins/*.writhem_*
 www/pages/*
+!www/pages/ajax_nukeit.php
 !www/pages/news.php
 !www/pages/newspost.php
 !www/pages/bookmarks.php

@@ -1,24 +1,14 @@
---- www/lib/framework/basepage.php	Thu May 02 11:23:07 2013
-+++ www/lib/framework/basepage.php	Thu May 02 11:29:31 2013
-@@ -66,6 +66,8 @@
- 		$users = new Users();
- 		if ($users->isLoggedIn())
+--- www/lib/predb.php	Mon Apr 15 22:44:07 2013
++++ www/lib/predb.php	Thu May 02 13:41:17 2013
+@@ -134,7 +134,7 @@
+ 	 */
+ 	public function updatePreDB($db, $preArray)
+ 	{
+-		if(!preg_match('/^(UN)?((MOD)?NUKED?|DELPRE)$/', $preArray['category']))
++		if(!preg_match('/^(UN)?((MOD)?NUKED?|DELPRE|LOCAL)$/', $preArray['category']))
  		{
-+            // default content for logged in users.
-+            $this->page = (isset($_GET['page'])) ? $_GET['page'] : ltrim($this->site->home_link, '/');
- 			$this->userdata = $users->getById($users->currentUserId());
- 			
- 			//
-@@ -106,6 +108,9 @@
- 		}
- 		else
- 		{
-+            // default content for unlogged in users.
-+            $this->page = (isset($_GET['page'])) ? $_GET['page'] : 'content';
-+
- 			$this->smarty->assign('isadmin',"false");	
- 			$this->smarty->assign('loggedin',"false");	
- 			$this->floodCheck(false, "");
+ 			$db->query(sprintf('INSERT INTO predb
+ 				(ctime, dirname, category, filesize, filecount, filename)
 --- www/lib/releasecomments.php	Mon Apr 15 22:44:07 2013
 +++ www/lib/releasecomments.php	Thu May 02 11:31:20 2013
 @@ -22,7 +22,7 @@
@@ -48,6 +38,27 @@
  		return $db->query($sql);		
  	}
  
+--- www/lib/framework/basepage.php	Thu May 02 11:23:07 2013
++++ www/lib/framework/basepage.php	Thu May 02 11:29:31 2013
+@@ -66,6 +66,8 @@
+ 		$users = new Users();
+ 		if ($users->isLoggedIn())
+ 		{
++            // default content for logged in users.
++            $this->page = (isset($_GET['page'])) ? $_GET['page'] : ltrim($this->site->home_link, '/');
+ 			$this->userdata = $users->getById($users->currentUserId());
+ 			
+ 			//
+@@ -106,6 +108,9 @@
+ 		}
+ 		else
+ 		{
++            // default content for unlogged in users.
++            $this->page = (isset($_GET['page'])) ? $_GET['page'] : 'content';
++
+ 			$this->smarty->assign('isadmin',"false");	
+ 			$this->smarty->assign('loggedin',"false");	
+ 			$this->floodCheck(false, "");
 --- www/pages/browse.php	Mon Apr 15 22:46:07 2013
 +++ www/pages/browse.php	Thu May 02 11:35:47 2013
 @@ -1,8 +1,10 @@

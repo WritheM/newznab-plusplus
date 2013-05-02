@@ -445,19 +445,19 @@
                             <input type="hidden" id="txtGUID" value="{$release.guid}"/>
                             <div class="input-prepend">
                                 <span class="add-on"><label for="txtDirName">DirName</label></span>
-                                <input class="span3" type="text" id="txtDirName" value="{$release.searchname|escape:'htmlall'}" required/>
+                                <input class="span3" type="text" id="txtDirName" value="{if $predb.dirname}{$predb.dirname}{else}{$release.searchname|escape:'htmlall'}{/if}" required/>
                             </div>
                             <div class="input-prepend">
                                 <span class="add-on"><label for="txtCategory">Category</label></span>
-                                <input class="span3" type="text" id="txtCategory" required/>
+                                <input class="span3" type="text" id="txtCategory" value="{$predb.category|escape:'htmlall'}" required/>
                             </div>
                             <div class="input-prepend">
                                 <span class="add-on"><label for="txtReason">Reason</label></span>
-                                <input class="span3" type="text" id="txtReason"/>
+                                <input class="span3" type="text" id="txtReason" value="{$predb.nukereason|escape:'htmlall'}"/>
                             </div>
                             <div class="input-prepend">
                                 <span class="add-on"><label for="txtScope">Scope</label></span>
-                                <input class="span3" type="text" id="txtScope" value="LOCAL"/>
+                                <input class="span3" type="text" id="txtScope" value="{if $predb.nuketype}{$predb.nuketype}{else}LOCAL{/if}"/>
                             </div>
                             <button class="btn btn-inverse" type="submit">Detonate!</button>
                         </form>
@@ -488,7 +488,7 @@
 			<tr>
 				<td class="less" title="{$comment.createddate}">
           {if $comment.role == -1}<i class="icon-globe" title="Syndicated User"></i>
-            {$comment.username}{if $isadmin} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}">{$comment.rolename}</a>{/if}
+            {$comment.username}{if $isadmin} @<a href="{$smarty.const.WWW_TOP}/admin/spotnab-edit.php?id={$comment.sourceid}&amp;from={$smarty.server.REQUEST_URI}">{$comment.rolename}</a>{/if}
           {elseif $comment.role == 2}<i class="icon-font" title="{$comment.rolename}"></i>
             <strong><a title="View {$comment.username}'s profile" href="{$smarty.const.WWW_TOP}/profile?name={$comment.username}">{$comment.username}</a></strong>
           {elseif $comment.role == 4}<i class="icon-certificate" title="{$comment.rolename}"></i>
